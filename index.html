@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lodya Portfolio</title>
+    <title>Lodya | AI Product Portfolio</title>
     <style>
       :root {
         color-scheme: light;
@@ -12,6 +12,7 @@
         --line: #d8dee8;
         --paper: #f7f4ee;
         --panel: #ffffff;
+        --soft: #eef4ef;
         --accent: #27745f;
         --accent-dark: #185544;
       }
@@ -29,54 +30,88 @@
       }
 
       main {
-        width: min(960px, calc(100% - 40px));
+        width: min(1080px, calc(100% - 40px));
         margin: 0 auto;
-        padding: 72px 0 56px;
+        padding: 56px 0;
       }
 
-      .intro {
+      section {
+        margin-top: 56px;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .hero {
         display: grid;
         gap: 28px;
+        min-height: 58vh;
         align-items: end;
-        min-height: 62vh;
-        border-bottom: 1px solid var(--line);
         padding-bottom: 48px;
+        border-bottom: 1px solid var(--line);
       }
 
       .eyebrow {
         margin: 0 0 18px;
         color: var(--accent-dark);
         font-size: 14px;
-        font-weight: 700;
-        letter-spacing: 0;
+        font-weight: 800;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
       }
 
-      h1 {
-        margin: 0;
-        max-width: 760px;
-        font-size: clamp(42px, 8vw, 88px);
-        line-height: 0.96;
-        letter-spacing: 0;
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
       }
 
-      .summary {
-        max-width: 680px;
-        margin: 22px 0 0;
+      h1 {
+        margin-bottom: 18px;
+        max-width: 840px;
+        font-size: clamp(44px, 8vw, 88px);
+        line-height: 0.98;
+        letter-spacing: -0.04em;
+      }
+
+      h2 {
+        margin-bottom: 12px;
+        font-size: clamp(28px, 4vw, 42px);
+        letter-spacing: -0.03em;
+      }
+
+      h3 {
+        margin-bottom: 10px;
+        font-size: 20px;
+      }
+
+      .lead {
+        max-width: 800px;
         color: var(--muted);
-        font-size: clamp(18px, 2.2vw, 22px);
-        line-height: 1.55;
+        font-size: clamp(18px, 2.4vw, 23px);
+        line-height: 1.6;
+      }
+
+      .section-intro {
+        max-width: 760px;
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.7;
+      }
+
+      .actions,
+      .tags,
+      .evidence-links,
+      .tool-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
       }
 
       .actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 30px;
-      }
-
-      a {
-        color: inherit;
+        margin-top: 28px;
       }
 
       .button {
@@ -86,10 +121,10 @@
         min-height: 44px;
         padding: 0 18px;
         border: 1px solid var(--ink);
-        border-radius: 6px;
+        border-radius: 999px;
         background: var(--ink);
         color: white;
-        font-weight: 700;
+        font-weight: 800;
         text-decoration: none;
       }
 
@@ -98,49 +133,134 @@
         color: var(--ink);
       }
 
-      .sections {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 18px;
-        margin-top: 34px;
+      .tags {
+        margin-top: 22px;
       }
 
-      .section {
-        min-height: 150px;
-        padding: 22px;
+      .tag,
+      .evidence-link,
+      .tool-item {
+        display: inline-flex;
+        align-items: center;
+        min-height: 32px;
+        padding: 6px 12px;
         border: 1px solid var(--line);
-        border-radius: 8px;
+        border-radius: 999px;
+        background: var(--panel);
+        color: var(--accent-dark);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 24px;
+      }
+
+      .card {
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
         background: var(--panel);
       }
 
-      .section h2 {
-        margin: 0 0 10px;
-        font-size: 18px;
+      .card p {
+        color: var(--muted);
+        line-height: 1.65;
       }
 
-      .section p {
+      .meta {
+        margin-bottom: 14px;
+        color: var(--accent-dark);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .capability-grid {
+        display: grid;
+        gap: 18px;
+        margin-top: 24px;
+      }
+
+      .capability {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+        padding: 26px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--panel);
+      }
+
+      .capability strong {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .deliverables {
         margin: 0;
+        padding-left: 18px;
         color: var(--muted);
-        line-height: 1.5;
+        line-height: 1.8;
+      }
+
+      .tools {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 24px;
+      }
+
+      .contact {
+        padding: 32px;
+        border-radius: 24px;
+        background: var(--ink);
+        color: white;
+      }
+
+      .contact p {
+        max-width: 720px;
+        color: rgba(255, 255, 255, 0.76);
+        line-height: 1.7;
+      }
+
+      .contact .button {
+        border-color: white;
+        background: white;
+        color: var(--ink);
+      }
+
+      .contact .button.secondary {
+        background: transparent;
+        color: white;
       }
 
       footer {
-        margin-top: 36px;
+        margin-top: 32px;
         color: var(--muted);
         font-size: 14px;
       }
 
-      @media (max-width: 760px) {
+      @media (max-width: 820px) {
         main {
-          width: min(100% - 28px, 960px);
-          padding-top: 42px;
+          width: min(100% - 28px, 1080px);
+          padding: 40px 0;
         }
 
-        .intro {
+        section {
+          margin-top: 42px;
+        }
+
+        .hero {
           min-height: auto;
+          padding-bottom: 38px;
         }
 
-        .sections {
+        .grid,
+        .capability,
+        .tools {
           grid-template-columns: 1fr;
         }
       }
@@ -148,34 +268,187 @@
   </head>
   <body>
     <main>
-      <section class="intro" aria-label="Portfolio introduction">
+      <section class="hero" aria-label="个人定位">
         <div>
-          <p class="eyebrow">Personal Portfolio</p>
+          <p class="eyebrow">AI Product Portfolio</p>
           <h1>Lodya</h1>
-          <p class="summary">
-            A growing portfolio for selected projects, case studies, and resume materials.
-            This page is being updated as new work is prepared for job applications.
+          <p class="lead">
+            AI 产品实习生 / AI 产品运营方向。关注 AI 产品从想法到落地的全过程，擅长将 Prompt 工程、AI 工作流、评测体系和 SOP 结合起来，把不稳定的 AI 能力转化为可验证、可复用、可交付的产品方案。
           </p>
+          <div class="tags" aria-label="核心标签">
+            <span class="tag">Prompt Engineering</span>
+            <span class="tag">AI Workflow</span>
+            <span class="tag">Evaluation System</span>
+            <span class="tag">Badcase Analysis</span>
+            <span class="tag">Delivery Loop</span>
+          </div>
           <div class="actions">
-            <a class="button" href="https://github.com/lodyahan38-byte/portfolio">View Source</a>
-            <a class="button secondary" href="https://github.com/lodyahan38-byte">GitHub Profile</a>
+            <a class="button" href="#evidence">查看经历证据</a>
+            <a class="button secondary" href="https://github.com/lodyahan38-byte">GitHub</a>
           </div>
         </div>
       </section>
 
-      <section class="sections" aria-label="Portfolio sections">
-        <article class="section">
-          <h2>Projects</h2>
-          <p>Selected project work will be added here with outcomes, responsibilities, and links.</p>
-        </article>
-        <article class="section">
-          <h2>Case Studies</h2>
-          <p>Process notes and polished writeups will document how each project was designed and built.</p>
-        </article>
-        <article class="section">
-          <h2>Resume</h2>
-          <p>Role-specific resume materials and contact details will be connected from this page.</p>
-        </article>
+      <section id="evidence" aria-labelledby="evidence-title">
+        <p class="eyebrow">Experience Evidence Map</p>
+        <h2 id="evidence-title">我的 AI 产品能力来自这些真实项目</h2>
+        <p class="section-intro">
+          这些经历覆盖了 AI 产品从需求拆解、Prompt 工程、工作流搭建、评测体系到交付复盘的关键环节。这里不是重复简历，而是把经历作为能力证据入口。
+        </p>
+        <div class="grid">
+          <article class="card">
+            <p class="meta">北京星系智科技有限公司 · AI 产品实习生</p>
+            <h3>Prompt 工程 / 模型适配 / badcase 归因 / 评测体系</h3>
+            <p>围绕 Seedance 模型特性进行提示词适配，参与分镜级生成质量评测体系建设，并将高频 badcase 反馈到 Prompt 迭代与生成策略调整中。</p>
+            <div class="evidence-links">
+              <span class="evidence-link">Seedance 模型适配</span>
+              <span class="evidence-link">质量评测体系</span>
+            </div>
+          </article>
+          <article class="card">
+            <p class="meta">北京阿塔奇科技有限公司 · AIGC 视频工作流架构师</p>
+            <h3>AIGC 视频 / 提示词库 / 输出可控性 / 工业化交付</h3>
+            <p>拆解 AIGC 视频生产流程，沉淀多维度提示词库和标准化 Prompt 体系，推动内容生产从单次经验转向可复用流程。</p>
+            <div class="evidence-links">
+              <span class="evidence-link">AIGC 工作流</span>
+              <span class="evidence-link">Prompt System</span>
+            </div>
+          </article>
+          <article class="card">
+            <p class="meta">“勇闯校招”AI 智能体项目 · 负责人</p>
+            <h3>AI Agent / Prompt 产品化 / 交互降维 / 0→1 验证</h3>
+            <p>将校招沟通经验转化为参数化 Prompt 智能体，通过角色化机制和复盘机制降低 0 经验用户的沟通冷启动难度。</p>
+            <div class="evidence-links">
+              <span class="evidence-link">AI Agent</span>
+              <span class="evidence-link">0→1 Exploration</span>
+            </div>
+          </article>
+          <article class="card">
+            <p class="meta">商业化数据与流程优化 · 广告媒介</p>
+            <h3>数据归因 / 标签体系 / 转化分析 / SOP 提效</h3>
+            <p>建立博主标签与转化表现反馈系统，通过数据识别高性价比流量，并将筛选与建联流程标准化，提升触达效率。</p>
+            <div class="evidence-links">
+              <span class="evidence-link">Data-driven Analysis</span>
+              <span class="evidence-link">Process Optimization</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="build-title">
+        <p class="eyebrow">What I Can Build</p>
+        <h2 id="build-title">我能解决的问题与产出</h2>
+        <p class="section-intro">
+          我更关注 AI 能力如何进入真实业务流程：先定义问题，再设计流程、评估效果，并把经验沉淀为可复用的方法和交付物。
+        </p>
+        <div class="capability-grid">
+          <article class="capability">
+            <div>
+              <h3>模糊 AI 需求 → 可执行产品方案</h3>
+              <p>将模糊的 AI 想法拆解为用户场景、任务流程、输入输出、约束条件和验证路径。</p>
+            </div>
+            <div>
+              <strong>可产出</strong>
+              <ul class="deliverables">
+                <li>需求拆解文档</li>
+                <li>用户场景分析</li>
+                <li>产品方案草稿</li>
+                <li>原型 / Demo 思路</li>
+              </ul>
+            </div>
+          </article>
+          <article class="capability">
+            <div>
+              <h3>单条 Prompt 经验 → 可复用 Prompt 系统</h3>
+              <p>把角色、任务、输入、输出、约束和评测标准结构化，沉淀为可复用的 Prompt 模板和提示词库。</p>
+            </div>
+            <div>
+              <strong>可产出</strong>
+              <ul class="deliverables">
+                <li>Prompt Engineering Template</li>
+                <li>Prompt Library</li>
+                <li>Prompt Iteration Log</li>
+                <li>输出约束说明</li>
+              </ul>
+            </div>
+          </article>
+          <article class="capability">
+            <div>
+              <h3>不稳定 AI 输出 → 可评估、可迭代问题</h3>
+              <p>通过 badcase 分类、质量标准和对比评测，把“感觉不稳定”的 AI 输出转化为可讨论、可复盘、可迭代的问题。</p>
+            </div>
+            <div>
+              <strong>可产出</strong>
+              <ul class="deliverables">
+                <li>Badcase Taxonomy</li>
+                <li>Evaluation Rubric</li>
+                <li>Quality Review Sheet</li>
+                <li>Version Comparison Notes</li>
+              </ul>
+            </div>
+          </article>
+          <article class="capability">
+            <div>
+              <h3>单次 AI 使用经验 → 团队工作流与 SOP</h3>
+              <p>将生成、审核、同步、反馈和复盘串成协作流程，让个人经验变成团队可复用的 SOP。</p>
+            </div>
+            <div>
+              <strong>可产出</strong>
+              <ul class="deliverables">
+                <li>AI Workflow Diagram</li>
+                <li>SOP</li>
+                <li>Review Checklist</li>
+                <li>Collaboration Process</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="tools-title">
+        <p class="eyebrow">Tools</p>
+        <h2 id="tools-title">我使用这些工具完成验证、搭建与交付</h2>
+        <div class="tools">
+          <article class="card">
+            <h3>AI Coding & Prototyping</h3>
+            <div class="tool-list">
+              <span class="tool-item">Claude Code</span>
+              <span class="tool-item">Codex</span>
+              <span class="tool-item">Cursor</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>LLM & Workflow</h3>
+            <div class="tool-list">
+              <span class="tool-item">ChatGPT</span>
+              <span class="tool-item">Claude</span>
+              <span class="tool-item">Kimi</span>
+              <span class="tool-item">Coze</span>
+              <span class="tool-item">Feishu Workflow</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>AIGC & Evaluation</h3>
+            <div class="tool-list">
+              <span class="tool-item">Midjourney</span>
+              <span class="tool-item">Seedance</span>
+              <span class="tool-item">Badcase Review</span>
+              <span class="tool-item">Evaluation Framework</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact" aria-label="联系方式">
+        <p class="eyebrow">Contact</p>
+        <h2>正在寻找 AI 产品 / AIGC 产品 / AI 产品运营相关实习机会</h2>
+        <p>
+          如果我的经历与你的团队方向匹配，欢迎通过简历、GitHub 或邮箱联系我。这个页面会持续更新真实项目材料、方法沉淀和案例详情。
+        </p>
+        <div class="actions">
+          <a class="button" href="https://github.com/lodyahan38-byte/portfolio">View Source</a>
+          <a class="button secondary" href="https://github.com/lodyahan38-byte">GitHub Profile</a>
+        </div>
       </section>
 
       <footer>Last updated in 2026.</footer>
