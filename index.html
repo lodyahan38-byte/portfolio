@@ -3,22 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lodya | AI Product Portfolio</title>
+    <title>Lodya | AIGC Product Portfolio</title>
     <style>
       :root {
         color-scheme: light;
-        --ink: #172033;
-        --muted: #5d687a;
-        --line: #d8dee8;
-        --paper: #f7f4ee;
+        --ink: #111827;
+        --muted: #5d6678;
+        --line: #d9e1ec;
+        --paper: #f6f8fb;
         --panel: #ffffff;
-        --soft: #eef4ef;
-        --accent: #27745f;
-        --accent-dark: #185544;
+        --blue: #1769ff;
+        --blue-dark: #0b47bd;
+        --blue-soft: #eaf2ff;
+        --cyan-soft: #e8fbff;
       }
 
       * {
         box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
       }
 
       body {
@@ -26,39 +31,22 @@
         min-height: 100vh;
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         color: var(--ink);
-        background: var(--paper);
-      }
-
-      main {
-        width: min(1080px, calc(100% - 40px));
-        margin: 0 auto;
-        padding: 56px 0;
-      }
-
-      section {
-        margin-top: 56px;
+        background: radial-gradient(circle at top right, var(--cyan-soft), transparent 30%), var(--paper);
       }
 
       a {
         color: inherit;
       }
 
-      .hero {
-        display: grid;
-        gap: 28px;
-        min-height: 58vh;
-        align-items: end;
-        padding-bottom: 48px;
-        border-bottom: 1px solid var(--line);
+      main {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 28px 0 56px;
       }
 
-      .eyebrow {
-        margin: 0 0 18px;
-        color: var(--accent-dark);
-        font-size: 14px;
-        font-weight: 800;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+      section {
+        scroll-margin-top: 28px;
+        margin-top: 64px;
       }
 
       h1,
@@ -69,389 +57,724 @@
       }
 
       h1 {
-        margin-bottom: 18px;
-        max-width: 840px;
-        font-size: clamp(44px, 8vw, 88px);
-        line-height: 0.98;
-        letter-spacing: -0.04em;
+        max-width: 880px;
+        margin-bottom: 20px;
+        font-size: clamp(48px, 9vw, 104px);
+        line-height: 0.95;
+        letter-spacing: 0;
       }
 
       h2 {
-        margin-bottom: 12px;
-        font-size: clamp(28px, 4vw, 42px);
-        letter-spacing: -0.03em;
+        margin-bottom: 14px;
+        font-size: clamp(30px, 4vw, 48px);
+        line-height: 1.05;
+        letter-spacing: 0;
       }
 
       h3 {
         margin-bottom: 10px;
-        font-size: 20px;
+        font-size: 22px;
+        line-height: 1.25;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        display: flex;
+        justify-content: flex-end;
+        padding: 14px 0;
+        backdrop-filter: blur(14px);
+      }
+
+      .lang-toggle {
+        min-height: 38px;
+        padding: 0 14px;
+        border: 1px solid rgba(23, 105, 255, 0.28);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.78);
+        color: var(--blue-dark);
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .hero {
+        display: grid;
+        min-height: 62vh;
+        align-items: end;
+        padding: 44px 0 54px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .eyebrow {
+        margin-bottom: 18px;
+        color: var(--blue-dark);
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .review-blue,
+      [data-i18n] {
+        color: var(--blue);
       }
 
       .lead {
-        max-width: 800px;
-        color: var(--muted);
-        font-size: clamp(18px, 2.4vw, 23px);
-        line-height: 1.6;
+        max-width: 820px;
+        color: var(--blue);
+        font-size: clamp(18px, 2.2vw, 23px);
+        line-height: 1.68;
       }
 
       .section-intro {
-        max-width: 760px;
-        color: var(--muted);
+        max-width: 780px;
+        color: var(--blue);
         font-size: 17px;
-        line-height: 1.7;
+        line-height: 1.75;
       }
 
-      .actions,
+      .nav-tags,
       .tags,
-      .evidence-links,
-      .tool-list {
+      .contact-actions {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
       }
 
-      .actions {
-        margin-top: 28px;
+      .nav-tags {
+        margin-top: 26px;
       }
 
-      .button {
+      .tag,
+      .pill {
         display: inline-flex;
         align-items: center;
-        justify-content: center;
-        min-height: 44px;
-        padding: 0 18px;
-        border: 1px solid var(--ink);
+        min-height: 34px;
+        padding: 7px 13px;
+        border: 1px solid rgba(23, 105, 255, 0.26);
         border-radius: 999px;
-        background: var(--ink);
-        color: white;
+        background: var(--panel);
+        color: var(--blue-dark);
+        font-size: 13px;
         font-weight: 800;
         text-decoration: none;
       }
 
-      .button.secondary {
-        background: transparent;
-        color: var(--ink);
-      }
-
-      .tags {
-        margin-top: 22px;
-      }
-
-      .tag,
-      .evidence-link,
-      .tool-item {
-        display: inline-flex;
-        align-items: center;
-        min-height: 32px;
-        padding: 6px 12px;
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        background: var(--panel);
-        color: var(--accent-dark);
-        font-size: 13px;
-        font-weight: 700;
+      .tag:hover,
+      .button:hover {
+        transform: translateY(-1px);
       }
 
       .grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 18px;
-        margin-top: 24px;
+        margin-top: 26px;
       }
 
-      .card {
+      .card,
+      .capability,
+      .toolkit-card,
+      .timeline-item {
+        border: 1px solid rgba(23, 105, 255, 0.2);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.86);
+        box-shadow: 0 18px 50px rgba(23, 105, 255, 0.08);
+      }
+
+      .card,
+      .toolkit-card,
+      .timeline-item {
         padding: 24px;
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        background: var(--panel);
       }
 
-      .card p {
-        color: var(--muted);
-        line-height: 1.65;
+      .result {
+        margin-bottom: 16px;
+        color: var(--blue-dark);
+        font-size: 15px;
+        font-weight: 900;
       }
 
-      .meta {
-        margin-bottom: 14px;
-        color: var(--accent-dark);
-        font-size: 13px;
-        font-weight: 800;
+      .card p,
+      .capability p,
+      .toolkit-card p,
+      .timeline-item p {
+        color: var(--blue);
+        line-height: 1.68;
       }
 
-      .capability-grid {
-        display: grid;
-        gap: 18px;
-        margin-top: 24px;
+      .tags {
+        margin-top: 18px;
       }
 
-      .capability {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 22px;
-        padding: 26px;
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        background: var(--panel);
+      details {
+        margin-top: 18px;
+        border-top: 1px solid rgba(23, 105, 255, 0.16);
+        padding-top: 14px;
       }
 
-      .capability strong {
-        display: block;
-        margin-bottom: 10px;
+      summary {
+        color: var(--blue-dark);
+        font-weight: 900;
+        cursor: pointer;
       }
 
-      .deliverables {
-        margin: 0;
+      .detail-list {
+        margin: 14px 0 0;
         padding-left: 18px;
-        color: var(--muted);
-        line-height: 1.8;
+        color: var(--blue);
+        line-height: 1.78;
       }
 
-      .tools {
+      .capabilities {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 18px;
-        margin-top: 24px;
+        margin-top: 26px;
+      }
+
+      .capability {
+        padding: 24px;
+      }
+
+      .toolkit {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 26px;
+      }
+
+      .cn-label {
+        display: block;
+        margin: -2px 0 12px;
+        color: var(--blue-dark);
+        font-weight: 900;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 14px;
+        margin-top: 26px;
+      }
+
+      .timeline-item {
+        display: grid;
+        grid-template-columns: minmax(150px, 0.7fr) 1.8fr minmax(130px, 0.5fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .timeline-item strong {
+        color: var(--blue-dark);
       }
 
       .contact {
+        display: grid;
+        grid-template-columns: 1fr 180px;
+        gap: 28px;
+        align-items: center;
         padding: 32px;
         border-radius: 24px;
         background: var(--ink);
+      }
+
+      .contact h2,
+      .contact p,
+      .contact [data-i18n] {
         color: white;
       }
 
       .contact p {
         max-width: 720px;
-        color: rgba(255, 255, 255, 0.76);
-        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.78);
       }
 
-      .contact .button {
-        border-color: white;
+      .contact-actions {
+        margin-top: 22px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        padding: 0 16px;
+        border: 1px solid white;
+        border-radius: 999px;
         background: white;
         color: var(--ink);
+        font-weight: 900;
+        text-decoration: none;
       }
 
-      .contact .button.secondary {
+      .button.secondary {
         background: transparent;
         color: white;
       }
 
+      .qr {
+        width: 180px;
+        padding: 12px;
+        border-radius: 16px;
+        background: white;
+      }
+
+      .qr img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
       footer {
-        margin-top: 32px;
+        margin-top: 34px;
         color: var(--muted);
         font-size: 14px;
       }
 
-      @media (max-width: 820px) {
+      @media (max-width: 860px) {
         main {
-          width: min(100% - 28px, 1080px);
-          padding: 40px 0;
+          width: min(100% - 28px, 1120px);
+          padding-top: 16px;
         }
 
         section {
-          margin-top: 42px;
+          margin-top: 46px;
         }
 
         .hero {
           min-height: auto;
-          padding-bottom: 38px;
+          padding-top: 24px;
         }
 
         .grid,
-        .capability,
-        .tools {
+        .capabilities,
+        .toolkit,
+        .contact,
+        .timeline-item {
           grid-template-columns: 1fr;
+        }
+
+        .qr {
+          width: 150px;
         }
       }
     </style>
   </head>
   <body>
     <main>
-      <section class="hero" aria-label="个人定位">
+      <div class="topbar">
+        <button class="lang-toggle" type="button" data-i18n="lang_button" aria-label="Switch language">English</button>
+      </div>
+
+      <section class="hero" aria-label="Portfolio introduction">
         <div>
-          <p class="eyebrow">AI Product Portfolio</p>
+          <p class="eyebrow" data-i18n="hero_eyebrow">AIGC Product Portfolio</p>
           <h1>Lodya</h1>
-          <p class="lead">
-            AI 产品实习生 / AI 产品运营方向。关注 AI 产品从想法到落地的全过程，擅长将 Prompt 工程、AI 工作流、评测体系和 SOP 结合起来，把不稳定的 AI 能力转化为可验证、可复用、可交付的产品方案。
+          <p class="lead" data-i18n="hero_lead">
+            AIGC 产品候选人，关注内容生产、Prompt 标准化、Workflow 搭建与评测体系，推动 AI 生成能力从单次试验走向可复用、可评估、可交付的工业化流程。
           </p>
-          <div class="tags" aria-label="核心标签">
-            <span class="tag">Prompt Engineering</span>
-            <span class="tag">AI Workflow</span>
-            <span class="tag">Evaluation System</span>
-            <span class="tag">Badcase Analysis</span>
-            <span class="tag">Delivery Loop</span>
-          </div>
-          <div class="actions">
-            <a class="button" href="#evidence">查看经历证据</a>
-            <a class="button secondary" href="https://github.com/lodyahan38-byte">GitHub</a>
+          <div class="nav-tags" aria-label="Capability navigation">
+            <a class="tag" href="#workflow" data-i18n="tag_workflow">Workflow 搭建</a>
+            <a class="tag" href="#evaluation" data-i18n="tag_evaluation">评测体系</a>
+            <a class="tag" href="#industrialization" data-i18n="tag_industrialization">AIGC 工业化</a>
+            <a class="tag" href="#prompt" data-i18n="tag_prompt">Prompt 产品化</a>
           </div>
         </div>
       </section>
 
-      <section id="evidence" aria-labelledby="evidence-title">
-        <p class="eyebrow">Experience Evidence Map</p>
-        <h2 id="evidence-title">我的 AI 产品能力来自这些真实项目</h2>
-        <p class="section-intro">
-          这些经历覆盖了 AI 产品从需求拆解、Prompt 工程、工作流搭建、评测体系到交付复盘的关键环节。这里不是重复简历，而是把经历作为能力证据入口。
+      <section id="outcome" aria-labelledby="outcome-title">
+        <p class="eyebrow" data-i18n="outcome_eyebrow">Outcome Snapshot</p>
+        <h2 id="outcome-title" data-i18n="outcome_title">Results first, details on demand.</h2>
+        <p class="section-intro" data-i18n="outcome_intro">
+          先展示项目结果与能力标签，感兴趣再展开工作流、评测体系、Agent 结构或数据流程。这个页面仍处于蓝色评审版，所有蓝色内容都可以继续调整。
         </p>
+      </section>
+
+      <section id="featured" aria-labelledby="featured-title">
+        <p class="eyebrow" data-i18n="featured_eyebrow">Featured Outcomes</p>
+        <h2 id="featured-title" data-i18n="featured_title">Four proof points for AIGC product work.</h2>
         <div class="grid">
-          <article class="card">
-            <p class="meta">北京星系智科技有限公司 · AI 产品实习生</p>
-            <h3>Prompt 工程 / 模型适配 / badcase 归因 / 评测体系</h3>
-            <p>围绕 Seedance 模型特性进行提示词适配，参与分镜级生成质量评测体系建设，并将高频 badcase 反馈到 Prompt 迭代与生成策略调整中。</p>
-            <div class="evidence-links">
-              <span class="evidence-link">Seedance 模型适配</span>
-              <span class="evidence-link">质量评测体系</span>
+          <article class="card" id="evaluation">
+            <p class="result" data-i18n="project_model_result">镜头合格率提升 25%</p>
+            <h3 data-i18n="project_model_title">图生视频大模型一致性优化</h3>
+            <p data-i18n="project_model_desc">通过提示词库适配与分镜级评测体系，将生成质量从主观判断转化为可归因、可复盘、可迭代的问题。</p>
+            <div class="tags">
+              <span class="pill" data-i18n="pill_model_1">模型适配</span>
+              <span class="pill" data-i18n="pill_model_2">评测体系</span>
+              <span class="pill" data-i18n="pill_model_3">badcase 归因</span>
             </div>
+            <details>
+              <summary data-i18n="project_model_cta">查看评测体系</summary>
+              <ul class="detail-list">
+                <li data-i18n="project_model_detail_1">在北京灵犀深智科技有限公司实习期间，围绕 Seedance 模型特性进行提示词工程与场景适配。</li>
+                <li data-i18n="project_model_detail_2">建立分镜级生成质量评测思路，将主体一致性、镜头稳定性、规则符合度等维度拆成可判断项。</li>
+                <li data-i18n="project_model_detail_3">归因高频 badcase，反向推动 Prompt 迭代与抽卡策略调整。</li>
+              </ul>
+            </details>
           </article>
-          <article class="card">
-            <p class="meta">北京阿塔奇科技有限公司 · AIGC 视频工作流架构师</p>
-            <h3>AIGC 视频 / 提示词库 / 输出可控性 / 工业化交付</h3>
-            <p>拆解 AIGC 视频生产流程，沉淀多维度提示词库和标准化 Prompt 体系，推动内容生产从单次经验转向可复用流程。</p>
-            <div class="evidence-links">
-              <span class="evidence-link">AIGC 工作流</span>
-              <span class="evidence-link">Prompt System</span>
+
+          <article class="card" id="workflow">
+            <p class="result" data-i18n="project_workflow_result">视频生产周期缩短 60%</p>
+            <h3 data-i18n="project_workflow_title">AIGC 视频工作流工业化</h3>
+            <p data-i18n="project_workflow_desc">将内容拆解、Prompt 标准化和输出可控性优化串成稳定生产流程，让 AIGC 视频从单次经验变成可复用流程。</p>
+            <div class="tags">
+              <span class="pill" data-i18n="pill_workflow_1">Workflow 搭建</span>
+              <span class="pill" data-i18n="pill_workflow_2">Prompt 标准化</span>
+              <span class="pill" data-i18n="pill_workflow_3">工业化交付</span>
             </div>
+            <details>
+              <summary data-i18n="project_workflow_cta">查看工作流</summary>
+              <ul class="detail-list">
+                <li data-i18n="project_workflow_detail_1">沉淀 20+ 维度提示词库，把审美、文化语境、多模态一致性转化为可复用描述模块。</li>
+                <li data-i18n="project_workflow_detail_2">搭建内容拆解、Prompt 生成、输出审核、返修同步的生产链路。</li>
+                <li data-i18n="project_workflow_detail_3">以标准化 Prompt 体系和检查清单降低返工，并缩短视频生产周期。</li>
+              </ul>
+            </details>
           </article>
-          <article class="card">
-            <p class="meta">“勇闯校招”AI 智能体项目 · 负责人</p>
-            <h3>AI Agent / Prompt 产品化 / 交互降维 / 0→1 验证</h3>
-            <p>将校招沟通经验转化为参数化 Prompt 智能体，通过角色化机制和复盘机制降低 0 经验用户的沟通冷启动难度。</p>
-            <div class="evidence-links">
-              <span class="evidence-link">AI Agent</span>
-              <span class="evidence-link">0→1 Exploration</span>
+
+          <article class="card" id="prompt">
+            <p class="result" data-i18n="project_agent_result">解决 0 经验用户沟通冷启动</p>
+            <h3 data-i18n="project_agent_title">“勇闯校招”AI 智能体</h3>
+            <p data-i18n="project_agent_desc">将面试沟通策略封装为参数化 Prompt 智能体，用交互降维把经验型判断转成可执行对话流程。</p>
+            <div class="tags">
+              <span class="pill" data-i18n="pill_agent_1">Agent 设计</span>
+              <span class="pill" data-i18n="pill_agent_2">Prompt 产品化</span>
+              <span class="pill" data-i18n="pill_agent_3">交互降维</span>
             </div>
+            <details>
+              <summary data-i18n="project_agent_cta">查看 Agent 结构</summary>
+              <ul class="detail-list">
+                <li data-i18n="project_agent_detail_1">把面试策略、提问、反馈和修正逻辑封装为可配置 Prompt 结构。</li>
+                <li data-i18n="project_agent_detail_2">引入角色机制和复盘机制，让用户不需要先理解复杂策略也能开始使用。</li>
+                <li data-i18n="project_agent_detail_3">沉淀 Prompt 产品化封装和敏捷组织迭代经验。</li>
+              </ul>
+            </details>
           </article>
+
           <article class="card">
-            <p class="meta">商业化数据与流程优化 · 广告媒介</p>
-            <h3>数据归因 / 标签体系 / 转化分析 / SOP 提效</h3>
-            <p>建立博主标签与转化表现反馈系统，通过数据识别高性价比流量，并将筛选与建联流程标准化，提升触达效率。</p>
-            <div class="evidence-links">
-              <span class="evidence-link">Data-driven Analysis</span>
-              <span class="evidence-link">Process Optimization</span>
+            <p class="result" data-i18n="project_growth_result">单人日均触达量提升 50%</p>
+            <h3 data-i18n="project_growth_title">流量归因与 SOP 提效</h3>
+            <p data-i18n="project_growth_desc">建立博主标签-转化表现反馈系统，将筛选、建联和反馈流程标准化，用数据识别高性价比流量。</p>
+            <div class="tags">
+              <span class="pill" data-i18n="pill_growth_1">流量归因</span>
+              <span class="pill" data-i18n="pill_growth_2">数据建模</span>
+              <span class="pill" data-i18n="pill_growth_3">SOP 提效</span>
             </div>
+            <details>
+              <summary data-i18n="project_growth_cta">查看数据流程</summary>
+              <ul class="detail-list">
+                <li data-i18n="project_growth_detail_1">建立博主标签与转化表现反馈系统，辅助判断流量性价比。</li>
+                <li data-i18n="project_growth_detail_2">将博主筛选与建联流程标准化，减少重复判断和沟通成本。</li>
+                <li data-i18n="project_growth_detail_3">这段经历作为商业化敏感度和数据驱动能力的补充证据。</li>
+              </ul>
+            </details>
           </article>
         </div>
       </section>
 
-      <section aria-labelledby="build-title">
-        <p class="eyebrow">What I Can Build</p>
-        <h2 id="build-title">我能解决的问题与产出</h2>
-        <p class="section-intro">
-          我更关注 AI 能力如何进入真实业务流程：先定义问题，再设计流程、评估效果，并把经验沉淀为可复用的方法和交付物。
-        </p>
-        <div class="capability-grid">
-          <article class="capability">
-            <div>
-              <h3>模糊 AI 需求 → 可执行产品方案</h3>
-              <p>将模糊的 AI 想法拆解为用户场景、任务流程、输入输出、约束条件和验证路径。</p>
-            </div>
-            <div>
-              <strong>可产出</strong>
-              <ul class="deliverables">
-                <li>需求拆解文档</li>
-                <li>用户场景分析</li>
-                <li>产品方案草稿</li>
-                <li>原型 / Demo 思路</li>
-              </ul>
-            </div>
+      <section id="capabilities" aria-labelledby="capabilities-title">
+        <p class="eyebrow" data-i18n="cap_eyebrow">Core Capabilities</p>
+        <h2 id="capabilities-title" data-i18n="cap_title">The three capabilities I want this portfolio to prove.</h2>
+        <div class="capabilities">
+          <article class="capability" id="industrialization">
+            <h3 data-i18n="cap_workflow_title">Workflow 搭建</h3>
+            <p data-i18n="cap_workflow_desc">把 AIGC 内容生产拆成输入、生成、审核、返修和同步节点，让复杂流程可以被协作和复用。</p>
           </article>
           <article class="capability">
-            <div>
-              <h3>单条 Prompt 经验 → 可复用 Prompt 系统</h3>
-              <p>把角色、任务、输入、输出、约束和评测标准结构化，沉淀为可复用的 Prompt 模板和提示词库。</p>
-            </div>
-            <div>
-              <strong>可产出</strong>
-              <ul class="deliverables">
-                <li>Prompt Engineering Template</li>
-                <li>Prompt Library</li>
-                <li>Prompt Iteration Log</li>
-                <li>输出约束说明</li>
-              </ul>
-            </div>
+            <h3 data-i18n="cap_eval_title">评测体系搭建</h3>
+            <p data-i18n="cap_eval_desc">把“不稳定”“不一致”“不好看”拆成可观察维度，通过 badcase 归因推动 Prompt 和流程迭代。</p>
           </article>
           <article class="capability">
-            <div>
-              <h3>不稳定 AI 输出 → 可评估、可迭代问题</h3>
-              <p>通过 badcase 分类、质量标准和对比评测，把“感觉不稳定”的 AI 输出转化为可讨论、可复盘、可迭代的问题。</p>
-            </div>
-            <div>
-              <strong>可产出</strong>
-              <ul class="deliverables">
-                <li>Badcase Taxonomy</li>
-                <li>Evaluation Rubric</li>
-                <li>Quality Review Sheet</li>
-                <li>Version Comparison Notes</li>
-              </ul>
-            </div>
-          </article>
-          <article class="capability">
-            <div>
-              <h3>单次 AI 使用经验 → 团队工作流与 SOP</h3>
-              <p>将生成、审核、同步、反馈和复盘串成协作流程，让个人经验变成团队可复用的 SOP。</p>
-            </div>
-            <div>
-              <strong>可产出</strong>
-              <ul class="deliverables">
-                <li>AI Workflow Diagram</li>
-                <li>SOP</li>
-                <li>Review Checklist</li>
-                <li>Collaboration Process</li>
-              </ul>
-            </div>
+            <h3 data-i18n="cap_delivery_title">工业化交付</h3>
+            <p data-i18n="cap_delivery_desc">把单次 AI 使用经验沉淀成 Prompt 模板、检查清单和 SOP，让个人经验进入团队生产流程。</p>
           </article>
         </div>
       </section>
 
-      <section aria-labelledby="tools-title">
-        <p class="eyebrow">Tools</p>
-        <h2 id="tools-title">我使用这些工具完成验证、搭建与交付</h2>
-        <div class="tools">
-          <article class="card">
-            <h3>AI Coding & Prototyping</h3>
-            <div class="tool-list">
-              <span class="tool-item">Claude Code</span>
-              <span class="tool-item">Codex</span>
-              <span class="tool-item">Cursor</span>
-            </div>
+      <section id="toolkit" aria-labelledby="toolkit-title">
+        <p class="eyebrow" data-i18n="toolkit_eyebrow">Productization Toolkit</p>
+        <h2 id="toolkit-title" data-i18n="toolkit_title">Reusable assets, not abstract methodology.</h2>
+        <p class="section-intro" data-i18n="toolkit_intro">我在项目中沉淀出的可复用工作流、评测方法和交付工具。</p>
+        <div class="toolkit">
+          <article class="toolkit-card">
+            <h3>Workflow Blueprint</h3>
+            <span class="cn-label" data-i18n="toolkit_workflow_label">工作流蓝图</span>
+            <p data-i18n="toolkit_workflow_desc">AIGC 内容生产从输入、生成、审核到同步交付的流程结构。</p>
           </article>
-          <article class="card">
-            <h3>LLM & Workflow</h3>
-            <div class="tool-list">
-              <span class="tool-item">ChatGPT</span>
-              <span class="tool-item">Claude</span>
-              <span class="tool-item">Kimi</span>
-              <span class="tool-item">Coze</span>
-              <span class="tool-item">Feishu Workflow</span>
-            </div>
+          <article class="toolkit-card">
+            <h3>Evaluation Matrix</h3>
+            <span class="cn-label" data-i18n="toolkit_eval_label">评测矩阵</span>
+            <p data-i18n="toolkit_eval_desc">主体一致性、镜头稳定性、风格一致性、规则符合度等评测维度。</p>
           </article>
-          <article class="card">
-            <h3>AIGC & Evaluation</h3>
-            <div class="tool-list">
-              <span class="tool-item">Midjourney</span>
-              <span class="tool-item">Seedance</span>
-              <span class="tool-item">Badcase Review</span>
-              <span class="tool-item">Evaluation Framework</span>
-            </div>
+          <article class="toolkit-card">
+            <h3>Badcase Taxonomy</h3>
+            <span class="cn-label" data-i18n="toolkit_badcase_label">问题归因分类</span>
+            <p data-i18n="toolkit_badcase_desc">高频问题分类、归因，并反向推动 Prompt 和流程迭代。</p>
+          </article>
+          <article class="toolkit-card">
+            <h3>Delivery SOP</h3>
+            <span class="cn-label" data-i18n="toolkit_sop_label">交付标准流程</span>
+            <p data-i18n="toolkit_sop_desc">生成、审核、返修、同步、复盘的标准化交付检查清单。</p>
           </article>
         </div>
       </section>
 
-      <section class="contact" aria-label="联系方式">
-        <p class="eyebrow">Contact</p>
-        <h2>正在寻找 AI 产品 / AIGC 产品 / AI 产品运营相关实习机会</h2>
-        <p>
-          如果我的经历与你的团队方向匹配，欢迎通过简历、GitHub 或邮箱联系我。这个页面会持续更新真实项目材料、方法沉淀和案例详情。
-        </p>
-        <div class="actions">
-          <a class="button" href="https://github.com/lodyahan38-byte/portfolio">View Source</a>
-          <a class="button secondary" href="https://github.com/lodyahan38-byte">GitHub Profile</a>
+      <section id="experience" aria-labelledby="experience-title">
+        <p class="eyebrow" data-i18n="experience_eyebrow">Experience Timeline</p>
+        <h2 id="experience-title" data-i18n="experience_title">Experience background, compressed.</h2>
+        <div class="timeline">
+          <article class="timeline-item">
+            <strong data-i18n="exp_1_time">2026.3 - 2026.5</strong>
+            <p data-i18n="exp_1_role">北京灵犀深智科技有限公司 · AI 产品实习生</p>
+            <p data-i18n="exp_1_tags">Prompt / 评测 / 模型适配</p>
+          </article>
+          <article class="timeline-item">
+            <strong data-i18n="exp_2_time">2026.1 - 2026.3</strong>
+            <p data-i18n="exp_2_role">北京阿塔奇科技有限公司 · AIGC 视频工作流架构师</p>
+            <p data-i18n="exp_2_tags">Workflow / Prompt / 工业化</p>
+          </article>
+          <article class="timeline-item">
+            <strong data-i18n="exp_3_time">2025.9 - 2025.12</strong>
+            <p data-i18n="exp_3_role">广东做叫必成传媒有限公司 · 广告媒介</p>
+            <p data-i18n="exp_3_tags">数据归因 / SOP / 商业化</p>
+          </article>
+          <article class="timeline-item">
+            <strong data-i18n="exp_4_time">2023.9 - 2027.6</strong>
+            <p data-i18n="exp_4_role">福建江夏学院 · 法学</p>
+            <p data-i18n="exp_4_tags">CET6 500+ / 创新创业奖项</p>
+          </article>
         </div>
       </section>
 
-      <footer>Last updated in 2026.</footer>
+      <section class="contact" aria-label="Contact">
+        <div>
+          <p class="eyebrow" data-i18n="contact_eyebrow">Contact</p>
+          <h2 data-i18n="contact_title">正在寻找 AIGC 产品 / AI 产品相关实习机会</h2>
+          <p data-i18n="contact_intro">如果你关注 AIGC 内容生产、AI 工作流、模型评测或 Agent 产品方向，欢迎通过简历或二维码进一步了解我。邮箱信息会在简历版本中同步补充。</p>
+          <div class="contact-actions">
+            <a class="button" href="#experience" data-i18n="contact_resume">查看在线简历入口</a>
+            <a class="button secondary" href="#featured" data-i18n="contact_projects">回到精选成果</a>
+          </div>
+        </div>
+        <div class="qr" aria-label="Portfolio QR code">
+          <img src="assets/portfolio-qr.svg" alt="QR code linking to this portfolio" />
+        </div>
+      </section>
+
+      <footer data-i18n="footer">Blue review version. Last updated in 2026.</footer>
     </main>
+
+    <script>
+      const copy = {
+        zh: {
+          lang_button: "English",
+          hero_eyebrow: "AIGC Product Portfolio",
+          hero_lead: "AIGC 产品候选人，关注内容生产、Prompt 标准化、Workflow 搭建与评测体系，推动 AI 生成能力从单次试验走向可复用、可评估、可交付的工业化流程。",
+          tag_workflow: "Workflow 搭建",
+          tag_evaluation: "评测体系",
+          tag_industrialization: "AIGC 工业化",
+          tag_prompt: "Prompt 产品化",
+          outcome_eyebrow: "Outcome Snapshot",
+          outcome_title: "Results first, details on demand.",
+          outcome_intro: "先展示项目结果与能力标签，感兴趣再展开工作流、评测体系、Agent 结构或数据流程。这个页面仍处于蓝色评审版，所有蓝色内容都可以继续调整。",
+          featured_eyebrow: "Featured Outcomes",
+          featured_title: "Four proof points for AIGC product work.",
+          project_model_result: "镜头合格率提升 25%",
+          project_model_title: "图生视频大模型一致性优化",
+          project_model_desc: "通过提示词库适配与分镜级评测体系，将生成质量从主观判断转化为可归因、可复盘、可迭代的问题。",
+          pill_model_1: "模型适配",
+          pill_model_2: "评测体系",
+          pill_model_3: "badcase 归因",
+          project_model_cta: "查看评测体系",
+          project_model_detail_1: "在北京灵犀深智科技有限公司实习期间，围绕 Seedance 模型特性进行提示词工程与场景适配。",
+          project_model_detail_2: "建立分镜级生成质量评测思路，将主体一致性、镜头稳定性、规则符合度等维度拆成可判断项。",
+          project_model_detail_3: "归因高频 badcase，反向推动 Prompt 迭代与抽卡策略调整。",
+          project_workflow_result: "视频生产周期缩短 60%",
+          project_workflow_title: "AIGC 视频工作流工业化",
+          project_workflow_desc: "将内容拆解、Prompt 标准化和输出可控性优化串成稳定生产流程，让 AIGC 视频从单次经验变成可复用流程。",
+          pill_workflow_1: "Workflow 搭建",
+          pill_workflow_2: "Prompt 标准化",
+          pill_workflow_3: "工业化交付",
+          project_workflow_cta: "查看工作流",
+          project_workflow_detail_1: "沉淀 20+ 维度提示词库，把审美、文化语境、多模态一致性转化为可复用描述模块。",
+          project_workflow_detail_2: "搭建内容拆解、Prompt 生成、输出审核、返修同步的生产链路。",
+          project_workflow_detail_3: "以标准化 Prompt 体系和检查清单降低返工，并缩短视频生产周期。",
+          project_agent_result: "解决 0 经验用户沟通冷启动",
+          project_agent_title: "“勇闯校招”AI 智能体",
+          project_agent_desc: "将面试沟通策略封装为参数化 Prompt 智能体，用交互降维把经验型判断转成可执行对话流程。",
+          pill_agent_1: "Agent 设计",
+          pill_agent_2: "Prompt 产品化",
+          pill_agent_3: "交互降维",
+          project_agent_cta: "查看 Agent 结构",
+          project_agent_detail_1: "把面试策略、提问、反馈和修正逻辑封装为可配置 Prompt 结构。",
+          project_agent_detail_2: "引入角色机制和复盘机制，让用户不需要先理解复杂策略也能开始使用。",
+          project_agent_detail_3: "沉淀 Prompt 产品化封装和敏捷组织迭代经验。",
+          project_growth_result: "单人日均触达量提升 50%",
+          project_growth_title: "流量归因与 SOP 提效",
+          project_growth_desc: "建立博主标签-转化表现反馈系统，将筛选、建联和反馈流程标准化，用数据识别高性价比流量。",
+          pill_growth_1: "流量归因",
+          pill_growth_2: "数据建模",
+          pill_growth_3: "SOP 提效",
+          project_growth_cta: "查看数据流程",
+          project_growth_detail_1: "建立博主标签与转化表现反馈系统，辅助判断流量性价比。",
+          project_growth_detail_2: "将博主筛选与建联流程标准化，减少重复判断和沟通成本。",
+          project_growth_detail_3: "这段经历作为商业化敏感度和数据驱动能力的补充证据。",
+          cap_eyebrow: "Core Capabilities",
+          cap_title: "The three capabilities I want this portfolio to prove.",
+          cap_workflow_title: "Workflow 搭建",
+          cap_workflow_desc: "把 AIGC 内容生产拆成输入、生成、审核、返修和同步节点，让复杂流程可以被协作和复用。",
+          cap_eval_title: "评测体系搭建",
+          cap_eval_desc: "把“不稳定”“不一致”“不好看”拆成可观察维度，通过 badcase 归因推动 Prompt 和流程迭代。",
+          cap_delivery_title: "工业化交付",
+          cap_delivery_desc: "把单次 AI 使用经验沉淀成 Prompt 模板、检查清单和 SOP，让个人经验进入团队生产流程。",
+          toolkit_eyebrow: "Productization Toolkit",
+          toolkit_title: "Reusable assets, not abstract methodology.",
+          toolkit_intro: "我在项目中沉淀出的可复用工作流、评测方法和交付工具。",
+          toolkit_workflow_label: "工作流蓝图",
+          toolkit_workflow_desc: "AIGC 内容生产从输入、生成、审核到同步交付的流程结构。",
+          toolkit_eval_label: "评测矩阵",
+          toolkit_eval_desc: "主体一致性、镜头稳定性、风格一致性、规则符合度等评测维度。",
+          toolkit_badcase_label: "问题归因分类",
+          toolkit_badcase_desc: "高频问题分类、归因，并反向推动 Prompt 和流程迭代。",
+          toolkit_sop_label: "交付标准流程",
+          toolkit_sop_desc: "生成、审核、返修、同步、复盘的标准化交付检查清单。",
+          experience_eyebrow: "Experience Timeline",
+          experience_title: "Experience background, compressed.",
+          exp_1_time: "2026.3 - 2026.5",
+          exp_1_role: "北京灵犀深智科技有限公司 · AI 产品实习生",
+          exp_1_tags: "Prompt / 评测 / 模型适配",
+          exp_2_time: "2026.1 - 2026.3",
+          exp_2_role: "北京阿塔奇科技有限公司 · AIGC 视频工作流架构师",
+          exp_2_tags: "Workflow / Prompt / 工业化",
+          exp_3_time: "2025.9 - 2025.12",
+          exp_3_role: "广东做叫必成传媒有限公司 · 广告媒介",
+          exp_3_tags: "数据归因 / SOP / 商业化",
+          exp_4_time: "2023.9 - 2027.6",
+          exp_4_role: "福建江夏学院 · 法学",
+          exp_4_tags: "CET6 500+ / 创新创业奖项",
+          contact_eyebrow: "Contact",
+          contact_title: "正在寻找 AIGC 产品 / AI 产品相关实习机会",
+          contact_intro: "如果你关注 AIGC 内容生产、AI 工作流、模型评测或 Agent 产品方向，欢迎通过简历或二维码进一步了解我。邮箱信息会在简历版本中同步补充。",
+          contact_resume: "查看在线简历入口",
+          contact_projects: "回到精选成果",
+          footer: "Blue review version. Last updated in 2026."
+        },
+        en: {
+          lang_button: "中文",
+          hero_eyebrow: "AIGC Product Portfolio",
+          hero_lead: "AIGC product candidate focused on content production, prompt standardization, workflow design, and evaluation systems. I turn AI generation from one-off experiments into reusable, measurable, and deliverable production workflows.",
+          tag_workflow: "Workflow Design",
+          tag_evaluation: "Evaluation System",
+          tag_industrialization: "AIGC Industrialization",
+          tag_prompt: "Prompt Productization",
+          outcome_eyebrow: "Outcome Snapshot",
+          outcome_title: "Results first, details on demand.",
+          outcome_intro: "This page shows outcomes and capability tags first. Recruiters and interviewers can expand details only when they want to inspect the workflow, evaluation system, agent structure, or data process.",
+          featured_eyebrow: "Featured Outcomes",
+          featured_title: "Four proof points for AIGC product work.",
+          project_model_result: "25% lift in shot-level pass rate",
+          project_model_title: "Image-to-Video Model Consistency Optimization",
+          project_model_desc: "Adapted prompt libraries and shot-level evaluation criteria to make generation quality attributable, reviewable, and iteratable.",
+          pill_model_1: "Model Adaptation",
+          pill_model_2: "Evaluation System",
+          pill_model_3: "Badcase Analysis",
+          project_model_cta: "View Evaluation System",
+          project_model_detail_1: "During my internship at Beijing Lingxi Shenzhi Technology, I worked on prompt engineering and scenario adaptation around Seedance model behavior.",
+          project_model_detail_2: "Built a shot-level review logic across subject consistency, camera stability, and rule compliance.",
+          project_model_detail_3: "Mapped frequent badcases back to prompt iterations and sampling strategy adjustments.",
+          project_workflow_result: "60% shorter video production cycle",
+          project_workflow_title: "AIGC Video Workflow Industrialization",
+          project_workflow_desc: "Connected content decomposition, prompt standardization, and output control into a repeatable production workflow.",
+          pill_workflow_1: "Workflow Design",
+          pill_workflow_2: "Prompt Standardization",
+          pill_workflow_3: "Industrial Delivery",
+          project_workflow_cta: "View Workflow",
+          project_workflow_detail_1: "Built a 20+ dimension prompt library that turns aesthetic, cultural, and multimodal consistency rules into reusable modules.",
+          project_workflow_detail_2: "Structured the production chain from content decomposition to prompt generation, output review, revision, and synchronization.",
+          project_workflow_detail_3: "Reduced rework through standardized prompts and review checklists.",
+          project_agent_result: "Solved communication cold start for zero-experience users",
+          project_agent_title: "Job Hunt AI Agent",
+          project_agent_desc: "Packaged interview communication strategies into a parameterized prompt agent and translated tacit experience into executable dialogue flows.",
+          pill_agent_1: "Agent Design",
+          pill_agent_2: "Prompt Productization",
+          pill_agent_3: "Interaction Simplification",
+          project_agent_cta: "View Agent Structure",
+          project_agent_detail_1: "Converted interview strategy, questioning, feedback, and correction logic into configurable prompt structures.",
+          project_agent_detail_2: "Introduced role and review mechanisms so users can start without first learning complex strategy concepts.",
+          project_agent_detail_3: "Built experience in prompt productization and agile iteration.",
+          project_growth_result: "50% lift in daily outreach volume per person",
+          project_growth_title: "Traffic Attribution and SOP Efficiency",
+          project_growth_desc: "Built a creator tagging and conversion feedback system, then standardized screening and outreach processes with data-driven judgment.",
+          pill_growth_1: "Traffic Attribution",
+          pill_growth_2: "Data Modeling",
+          pill_growth_3: "SOP Efficiency",
+          project_growth_cta: "View Data Process",
+          project_growth_detail_1: "Built a creator tagging and conversion feedback system to evaluate traffic cost-effectiveness.",
+          project_growth_detail_2: "Standardized creator screening and outreach to reduce repeated judgment and communication cost.",
+          project_growth_detail_3: "This experience supports my commercial sense and data-driven product judgment.",
+          cap_eyebrow: "Core Capabilities",
+          cap_title: "The three capabilities I want this portfolio to prove.",
+          cap_workflow_title: "Workflow Design",
+          cap_workflow_desc: "Break AIGC content production into input, generation, review, revision, and synchronization nodes so the process can be reused by a team.",
+          cap_eval_title: "Evaluation System Design",
+          cap_eval_desc: "Turn unstable or inconsistent AI outputs into observable dimensions and use badcase attribution to improve prompts and process design.",
+          cap_delivery_title: "Industrialized Delivery",
+          cap_delivery_desc: "Turn one-off AI usage into prompt templates, checklists, and SOPs that can enter a team production workflow.",
+          toolkit_eyebrow: "Productization Toolkit",
+          toolkit_title: "Reusable assets, not abstract methodology.",
+          toolkit_intro: "Reusable workflow, evaluation, and delivery assets I have built through project work.",
+          toolkit_workflow_label: "Workflow Blueprint",
+          toolkit_workflow_desc: "A structured AIGC production flow from input and generation to review and delivery synchronization.",
+          toolkit_eval_label: "Evaluation Matrix",
+          toolkit_eval_desc: "A review matrix covering subject consistency, camera stability, visual style, and rule compliance.",
+          toolkit_badcase_label: "Badcase Taxonomy",
+          toolkit_badcase_desc: "A taxonomy for classifying frequent issues and feeding them back into prompt and workflow iteration.",
+          toolkit_sop_label: "Delivery SOP",
+          toolkit_sop_desc: "A standardized checklist for generation, review, revision, synchronization, and retrospective learning.",
+          experience_eyebrow: "Experience Timeline",
+          experience_title: "Experience background, compressed.",
+          exp_1_time: "Mar 2026 - May 2026",
+          exp_1_role: "Beijing Lingxi Shenzhi Technology · AI Product Intern",
+          exp_1_tags: "Prompt / Evaluation / Model Adaptation",
+          exp_2_time: "Jan 2026 - Mar 2026",
+          exp_2_role: "Beijing Ataqi Technology · AIGC Video Workflow Architect",
+          exp_2_tags: "Workflow / Prompt / Industrialization",
+          exp_3_time: "Sep 2025 - Dec 2025",
+          exp_3_role: "Guangdong Zuojiao Bicheng Media · Advertising Media",
+          exp_3_tags: "Attribution / SOP / Commercial Sense",
+          exp_4_time: "Sep 2023 - Jun 2027",
+          exp_4_role: "Fujian Jiangxia University · Law",
+          exp_4_tags: "CET6 500+ / Innovation Awards",
+          contact_eyebrow: "Contact",
+          contact_title: "Seeking AIGC Product / AI Product internship opportunities",
+          contact_intro: "If your team works on AIGC content production, AI workflows, model evaluation, or agent products, feel free to learn more through my resume entry or QR code.",
+          contact_resume: "View Resume Entry",
+          contact_projects: "Back to Outcomes",
+          footer: "Blue review version. Last updated in 2026."
+        }
+      };
+
+      let currentLang = "zh";
+      const elements = document.querySelectorAll("[data-i18n]");
+      const button = document.querySelector(".lang-toggle");
+
+      function applyLanguage(lang) {
+        currentLang = lang;
+        document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+        elements.forEach((element) => {
+          const key = element.dataset.i18n;
+          if (copy[lang][key]) {
+            element.textContent = copy[lang][key];
+          }
+        });
+      }
+
+      button.addEventListener("click", () => {
+        applyLanguage(currentLang === "zh" ? "en" : "zh");
+      });
+
+      applyLanguage("zh");
+    </script>
   </body>
 </html>
