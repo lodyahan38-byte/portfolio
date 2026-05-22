@@ -6,775 +6,969 @@
     <title>Lodya | AIGC Product Portfolio</title>
     <style>
       :root {
-        color-scheme: light;
-        --ink: #111827;
-        --muted: #5d6678;
-        --line: #d9e1ec;
-        --paper: #f6f8fb;
-        --panel: #ffffff;
-        --blue: #1769ff;
-        --blue-dark: #0b47bd;
-        --blue-soft: #eaf2ff;
-        --cyan-soft: #e8fbff;
+        color-scheme: dark;
+        --bg: #070b18;
+        --bg-2: #0d1230;
+        --paper: #ffd35a;
+        --paper-light: #fff3bf;
+        --ink: #f8fbff;
+        --muted: #a8b7d8;
+        --blue: #3b82f6;
+        --cyan: #93c5fd;
+        --violet: #a78bfa;
+        --pink: #f9a8d4;
+        --glass: rgba(255, 255, 255, 0.055);
+        --glass-strong: rgba(255, 255, 255, 0.11);
+        --line: rgba(147, 197, 253, 0.28);
+        --shadow: 0 0 32px rgba(59, 130, 246, 0.24);
       }
 
-      * {
-        box-sizing: border-box;
-      }
+      * { box-sizing: border-box; }
 
-      html {
-        scroll-behavior: smooth;
-      }
+      html { scroll-behavior: smooth; }
 
       body {
         margin: 0;
         min-height: 100vh;
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         color: var(--ink);
-        background: radial-gradient(circle at top right, var(--cyan-soft), transparent 30%), var(--paper);
+        background:
+          radial-gradient(circle at 12% 10%, rgba(59, 130, 246, 0.18), transparent 30%),
+          radial-gradient(circle at 88% 16%, rgba(167, 139, 250, 0.16), transparent 28%),
+          linear-gradient(135deg, var(--bg), var(--bg-2) 48%, #070815);
+        overflow-x: hidden;
       }
 
-      a {
-        color: inherit;
+      @media (pointer: fine) {
+        body, a, button, summary { cursor: none; }
       }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -3;
+        background-image:
+          linear-gradient(rgba(147, 197, 253, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(147, 197, 253, 0.06) 1px, transparent 1px);
+        background-size: 52px 52px;
+        mask-image: linear-gradient(to bottom, black 0%, transparent 90%);
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        pointer-events: none;
+        background:
+          radial-gradient(circle at 20% 32%, rgba(255, 211, 90, 0.12) 0 2px, transparent 3px),
+          radial-gradient(circle at 68% 22%, rgba(255, 255, 255, 0.18) 0 1px, transparent 2px),
+          radial-gradient(circle at 78% 68%, rgba(147, 197, 253, 0.18) 0 2px, transparent 3px),
+          radial-gradient(circle at 28% 82%, rgba(249, 168, 212, 0.15) 0 2px, transparent 3px);
+        background-size: 180px 180px, 220px 220px, 200px 200px, 260px 260px;
+        opacity: 0.8;
+      }
+
+      a { color: inherit; }
 
       main {
-        width: min(1120px, calc(100% - 40px));
+        width: min(1180px, calc(100% - 40px));
         margin: 0 auto;
-        padding: 28px 0 56px;
+        padding: 22px 0 60px;
       }
 
       section {
-        scroll-margin-top: 28px;
-        margin-top: 64px;
+        margin-top: 86px;
+        scroll-margin-top: 36px;
       }
 
-      h1,
-      h2,
-      h3,
-      p {
-        margin-top: 0;
-      }
+      h1, h2, h3, p { margin-top: 0; }
 
       h1 {
-        max-width: 880px;
-        margin-bottom: 20px;
-        font-size: clamp(48px, 9vw, 104px);
-        line-height: 0.95;
+        margin-bottom: 18px;
+        font-size: clamp(64px, 12vw, 148px);
+        line-height: 0.86;
         letter-spacing: 0;
+        text-shadow: 0 0 22px rgba(147, 197, 253, 0.35);
       }
 
       h2 {
-        margin-bottom: 14px;
-        font-size: clamp(30px, 4vw, 48px);
-        line-height: 1.05;
+        margin-bottom: 16px;
+        font-size: clamp(34px, 5vw, 64px);
+        line-height: 0.98;
         letter-spacing: 0;
       }
 
       h3 {
         margin-bottom: 10px;
-        font-size: 22px;
-        line-height: 1.25;
+        font-size: clamp(20px, 2vw, 26px);
+        line-height: 1.18;
+        letter-spacing: 0;
       }
 
+      p { color: var(--muted); line-height: 1.75; }
+
       .topbar {
-        position: sticky;
-        top: 0;
-        z-index: 5;
+        position: fixed;
+        top: 16px;
+        right: 18px;
+        z-index: 20;
         display: flex;
-        justify-content: flex-end;
-        padding: 14px 0;
-        backdrop-filter: blur(14px);
+        gap: 10px;
+        align-items: center;
+      }
+
+      .lang-toggle,
+      .terminal-skip {
+        border: 1px solid rgba(147, 197, 253, 0.32);
+        border-radius: 999px;
+        background: rgba(7, 11, 24, 0.62);
+        color: #e8f2ff;
+        box-shadow: 0 0 18px rgba(59, 130, 246, 0.16);
+        backdrop-filter: blur(16px);
+        font-weight: 800;
       }
 
       .lang-toggle {
         min-height: 38px;
-        padding: 0 14px;
-        border: 1px solid rgba(23, 105, 255, 0.28);
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.78);
-        color: var(--blue-dark);
-        font-weight: 800;
-        cursor: pointer;
+        padding: 0 15px;
       }
 
-      .hero {
+      .terminal-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
         display: grid;
-        min-height: 62vh;
-        align-items: end;
-        padding: 44px 0 54px;
-        border-bottom: 1px solid var(--line);
+        place-items: center;
+        padding: 24px;
+        background:
+          radial-gradient(circle at 50% 32%, rgba(59, 130, 246, 0.18), transparent 36%),
+          rgba(5, 8, 18, 0.96);
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+
+      .terminal-loader.is-hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .terminal-window {
+        width: min(720px, 100%);
+        border: 1px solid rgba(147, 197, 253, 0.28);
+        border-radius: 18px;
+        background: rgba(2, 6, 23, 0.88);
+        box-shadow: 0 0 60px rgba(59, 130, 246, 0.22);
+        overflow: hidden;
+      }
+
+      .terminal-head {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        border-bottom: 1px solid rgba(147, 197, 253, 0.16);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .dot { width: 11px; height: 11px; border-radius: 50%; }
+      .dot.red { background: #ff5f57; }
+      .dot.yellow { background: #febc2e; }
+      .dot.green { background: #28c840; }
+
+      .terminal-body {
+        padding: 26px 22px 30px;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        color: #c7e2ff;
+        font-size: clamp(14px, 2.2vw, 18px);
+        line-height: 1.8;
+      }
+
+      .terminal-line {
+        overflow: hidden;
+        white-space: nowrap;
+        width: 0;
+        animation: typing 0.85s steps(42, end) forwards;
+      }
+
+      .terminal-line:nth-child(2) { animation-delay: 0.65s; }
+      .terminal-line:nth-child(3) { animation-delay: 1.35s; }
+      .terminal-line:nth-child(4) { animation-delay: 2.05s; }
+
+      @keyframes typing { to { width: 100%; } }
+
+      .hero {
+        position: relative;
+        display: grid;
+        min-height: 92vh;
+        align-items: center;
+        padding: 96px 0 68px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.72fr);
+        gap: 44px;
+        align-items: center;
       }
 
       .eyebrow {
         margin-bottom: 18px;
-        color: var(--blue-dark);
-        font-size: 14px;
+        color: var(--cyan);
+        font-size: 13px;
         font-weight: 900;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
       }
 
-      .review-blue,
-      [data-i18n] {
-        color: var(--blue);
-      }
-
       .lead {
-        max-width: 820px;
-        color: var(--blue);
-        font-size: clamp(18px, 2.2vw, 23px);
-        line-height: 1.68;
+        max-width: 780px;
+        color: #dbeafe;
+        font-size: clamp(18px, 2.2vw, 24px);
       }
 
-      .section-intro {
-        max-width: 780px;
-        color: var(--blue);
-        font-size: 17px;
-        line-height: 1.75;
-      }
+      .review-blue { color: #93c5fd; }
 
       .nav-tags,
-      .tags,
-      .contact-actions {
+      .chip-row,
+      .base-list {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 12px;
       }
 
-      .nav-tags {
-        margin-top: 26px;
-      }
+      .nav-tags { margin-top: 30px; }
 
-      .tag,
-      .pill {
-        display: inline-flex;
-        align-items: center;
-        min-height: 34px;
-        padding: 7px 13px;
-        border: 1px solid rgba(23, 105, 255, 0.26);
-        border-radius: 999px;
-        background: var(--panel);
-        color: var(--blue-dark);
-        font-size: 13px;
-        font-weight: 800;
-        text-decoration: none;
-      }
-
-      .tag:hover,
-      .button:hover {
-        transform: translateY(-1px);
-      }
-
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px;
-        margin-top: 26px;
-      }
-
-      .card,
-      .capability,
-      .toolkit-card,
-      .timeline-item {
-        border: 1px solid rgba(23, 105, 255, 0.2);
-        border-radius: 18px;
-        background: rgba(255, 255, 255, 0.86);
-        box-shadow: 0 18px 50px rgba(23, 105, 255, 0.08);
-      }
-
-      .card,
-      .toolkit-card,
-      .timeline-item {
-        padding: 24px;
-      }
-
-      .result {
-        margin-bottom: 16px;
-        color: var(--blue-dark);
-        font-size: 15px;
-        font-weight: 900;
-      }
-
-      .card p,
-      .capability p,
-      .toolkit-card p,
-      .timeline-item p {
-        color: var(--blue);
-        line-height: 1.68;
-      }
-
-      .tags {
-        margin-top: 18px;
-      }
-
-      details {
-        margin-top: 18px;
-        border-top: 1px solid rgba(23, 105, 255, 0.16);
-        padding-top: 14px;
-      }
-
-      summary {
-        color: var(--blue-dark);
-        font-weight: 900;
-        cursor: pointer;
-      }
-
-      .detail-list {
-        margin: 14px 0 0;
-        padding-left: 18px;
-        color: var(--blue);
-        line-height: 1.78;
-      }
-
-      .capabilities {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 18px;
-        margin-top: 26px;
-      }
-
-      .capability {
-        padding: 24px;
-      }
-
-      .toolkit {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 18px;
-        margin-top: 26px;
-      }
-
-      .cn-label {
-        display: block;
-        margin: -2px 0 12px;
-        color: var(--blue-dark);
-        font-weight: 900;
-      }
-
-      .timeline {
-        display: grid;
-        gap: 14px;
-        margin-top: 26px;
-      }
-
-      .timeline-item {
-        display: grid;
-        grid-template-columns: minmax(150px, 0.7fr) 1.8fr minmax(130px, 0.5fr);
-        gap: 18px;
-        align-items: start;
-      }
-
-      .timeline-item strong {
-        color: var(--blue-dark);
-      }
-
-      .contact {
-        display: grid;
-        grid-template-columns: 1fr 180px;
-        gap: 28px;
-        align-items: center;
-        padding: 32px;
-        border-radius: 24px;
-        background: var(--ink);
-      }
-
-      .contact h2,
-      .contact p,
-      .contact [data-i18n] {
-        color: white;
-      }
-
-      .contact p {
-        max-width: 720px;
-        color: rgba(255, 255, 255, 0.78);
-      }
-
-      .contact-actions {
-        margin-top: 22px;
-      }
-
-      .button {
+      .tech-btn {
+        position: relative;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 42px;
-        padding: 0 16px;
-        border: 1px solid white;
+        min-height: 44px;
+        padding: 0 18px;
+        overflow: hidden;
+        border: 1px solid rgba(59, 130, 246, 0.3);
         border-radius: 999px;
-        background: white;
-        color: var(--ink);
+        background: rgba(255, 255, 255, 0.03);
+        color: #eef6ff;
+        box-shadow: 0 0 18px rgba(59, 130, 246, 0.18);
+        backdrop-filter: blur(14px);
         font-weight: 900;
         text-decoration: none;
+        transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
       }
 
-      .button.secondary {
-        background: transparent;
-        color: white;
+      .tech-btn::before {
+        content: "";
+        position: absolute;
+        top: -45%;
+        left: -70%;
+        width: 58%;
+        height: 190%;
+        background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.92), transparent);
+        transform: skewX(-22deg);
+        animation: comet 2.8s linear infinite;
       }
 
-      .qr {
-        width: 180px;
-        padding: 12px;
+      .tech-btn span { position: relative; z-index: 1; }
+
+      .tech-btn:hover {
+        transform: translateY(-2px) scale(1.05);
+        border-color: rgba(147, 197, 253, 0.92);
+        background: rgba(59, 130, 246, 0.11);
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+      }
+
+      @keyframes comet { to { left: 118%; } }
+
+      .doodle-card {
+        position: relative;
+        min-height: 440px;
+        border: 2px solid rgba(17, 24, 39, 0.18);
+        border-radius: 24px;
+        background:
+          radial-gradient(circle at 28% 18%, rgba(255, 255, 255, 0.85), transparent 0 38px, transparent 39px),
+          linear-gradient(135deg, #ffe18a, #ffc83d 58%, #f5a524);
+        box-shadow: 14px 14px 0 rgba(255, 211, 90, 0.14), 0 0 48px rgba(59, 130, 246, 0.2);
+        overflow: hidden;
+      }
+
+      .doodle-card::before,
+      .doodle-card::after {
+        content: "";
+        position: absolute;
+        border: 3px solid rgba(7, 11, 24, 0.7);
+        border-radius: 52% 48% 45% 55%;
+        transform: rotate(-9deg);
+      }
+
+      .doodle-card::before {
+        width: 170px;
+        height: 170px;
+        left: 58px;
+        top: 70px;
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.18);
+      }
+
+      .doodle-card::after {
+        right: -38px;
+        bottom: 30px;
+        width: 210px;
+        height: 210px;
+        border-style: dashed;
+        opacity: 0.7;
+      }
+
+      .sketch-line {
+        position: absolute;
+        left: 38px;
+        right: 34px;
+        bottom: 82px;
+        height: 16px;
+        border-top: 3px solid rgba(7, 11, 24, 0.68);
+        border-radius: 50%;
+        transform: rotate(-3deg);
+      }
+
+      .planet {
+        position: absolute;
+        left: 88px;
+        top: 98px;
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 34% 30%, #fff, #93c5fd 36%, #3b82f6 72%, #172554);
+        box-shadow: 0 0 42px rgba(59, 130, 246, 0.66);
+      }
+
+      .planet::after {
+        content: "";
+        position: absolute;
+        inset: 38px -24px;
+        border: 2px solid rgba(255, 255, 255, 0.75);
+        border-radius: 50%;
+        transform: rotate(-18deg);
+      }
+
+      .hero-note {
+        position: absolute;
+        right: 28px;
+        top: 28px;
+        width: 190px;
+        padding: 16px;
+        border: 2px solid rgba(7, 11, 24, 0.72);
         border-radius: 16px;
-        background: white;
+        background: rgba(255, 255, 255, 0.48);
+        color: #111827;
+        font-weight: 900;
+        line-height: 1.45;
+        transform: rotate(4deg);
       }
 
-      .qr img {
-        display: block;
-        width: 100%;
-        height: auto;
+      .section-head {
+        display: grid;
+        grid-template-columns: minmax(0, 0.88fr) minmax(280px, 0.42fr);
+        gap: 28px;
+        align-items: end;
+        margin-bottom: 30px;
       }
+
+      .section-kicker {
+        color: var(--paper);
+      }
+
+      .section-copy { max-width: 760px; }
+
+      .paper-note {
+        position: relative;
+        padding: 22px;
+        border: 2px solid rgba(17, 24, 39, 0.7);
+        border-radius: 20px;
+        background: var(--paper-light);
+        color: #111827;
+        box-shadow: 8px 8px 0 rgba(255, 211, 90, 0.28);
+        transform: rotate(1.2deg);
+      }
+
+      .paper-note p { color: #1f2937; margin-bottom: 0; }
+
+      .agent-grid,
+      .timeline-grid,
+      .contact-grid {
+        display: grid;
+        gap: 18px;
+      }
+
+      .agent-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .panel,
+      .agent-card,
+      .video-card,
+      .feishu-card,
+      .timeline-item,
+      .contact-panel {
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.035));
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(18px);
+      }
+
+      .panel { padding: 26px; }
+
+      .agent-card {
+        display: block;
+        overflow: hidden;
+        text-decoration: none;
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .agent-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(147, 197, 253, 0.78);
+        box-shadow: 0 0 38px rgba(59, 130, 246, 0.36);
+      }
+
+      .agent-visual {
+        position: relative;
+        aspect-ratio: 4 / 3;
+        background:
+          radial-gradient(circle at 32% 26%, #fff5c7 0 18px, transparent 19px),
+          radial-gradient(circle at 66% 42%, rgba(59, 130, 246, 0.85) 0 28px, transparent 29px),
+          linear-gradient(135deg, #ffd35a, #fef3c7);
+      }
+
+      .agent-visual::before {
+        content: attr(data-slot);
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        padding: 7px 10px;
+        border: 2px solid rgba(17, 24, 39, 0.68);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.62);
+        color: #111827;
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .agent-body,
+      .video-body,
+      .feishu-card,
+      .timeline-item,
+      .contact-panel {
+        padding: 22px;
+      }
+
+      .interface-hint {
+        margin: 14px 0 0;
+        color: var(--cyan);
+        font-size: 13px;
+        font-family: "SFMono-Regular", Consolas, monospace;
+      }
+
+      .video-rail {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(270px, 34%);
+        gap: 18px;
+        overflow-x: auto;
+        padding: 4px 0 18px;
+        scroll-snap-type: x mandatory;
+      }
+
+      .video-card {
+        min-height: 390px;
+        overflow: hidden;
+        scroll-snap-align: start;
+      }
+
+      .video-shell {
+        position: relative;
+        aspect-ratio: 9 / 16;
+        max-height: 560px;
+        background:
+          radial-gradient(circle at 50% 28%, rgba(255, 255, 255, 0.78), transparent 0 26px, transparent 27px),
+          linear-gradient(180deg, rgba(59, 130, 246, 0.24), rgba(249, 168, 212, 0.14)),
+          #090f24;
+      }
+
+      .video-shell video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .video-placeholder {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding: 22px;
+        text-align: center;
+        color: #dbeafe;
+        font-weight: 900;
+      }
+
+      .feishu-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 22px;
+        align-items: center;
+        margin-top: 18px;
+      }
+
+      .timeline-wrap {
+        position: relative;
+      }
+
+      .timeline-wrap::before {
+        content: "";
+        position: absolute;
+        left: 18px;
+        top: 8px;
+        bottom: 8px;
+        width: 3px;
+        border-radius: 999px;
+        background: linear-gradient(var(--paper), var(--blue), var(--violet));
+        box-shadow: 0 0 24px rgba(59, 130, 246, 0.42);
+      }
+
+      .timeline-grid { padding-left: 52px; }
+
+      .timeline-item {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(150px, 0.42fr) minmax(0, 1fr) minmax(140px, 0.42fr);
+        gap: 18px;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -42px;
+        top: 26px;
+        width: 16px;
+        height: 16px;
+        border: 3px solid #07101f;
+        border-radius: 50%;
+        background: var(--paper);
+        box-shadow: 0 0 18px rgba(255, 211, 90, 0.7);
+      }
+
+      .timeline-item:hover {
+        transform: translateX(4px);
+        border-color: rgba(255, 211, 90, 0.7);
+      }
+
+      .timeline-detail {
+        grid-column: 1 / -1;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.25s ease, opacity 0.25s ease;
+      }
+
+      .timeline-item:hover .timeline-detail,
+      .timeline-item:focus-within .timeline-detail {
+        max-height: 220px;
+        opacity: 1;
+      }
+
+      .keyword {
+        color: var(--cyan);
+        font-weight: 900;
+      }
+
+      .base-list { margin-top: 18px; }
+
+      .base-chip {
+        padding: 10px 14px;
+        border: 1px solid rgba(255, 211, 90, 0.42);
+        border-radius: 999px;
+        background: rgba(255, 211, 90, 0.08);
+        color: #fff2b5;
+        font-weight: 900;
+      }
+
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(210px, 0.35fr);
+        align-items: center;
+      }
+
+      .qr-box {
+        width: 180px;
+        justify-self: center;
+        padding: 12px;
+        border-radius: 20px;
+        background: #fff;
+        box-shadow: 0 0 36px rgba(59, 130, 246, 0.32);
+      }
+
+      .qr-box img { display: block; width: 100%; height: auto; }
 
       footer {
-        margin-top: 34px;
-        color: var(--muted);
-        font-size: 14px;
+        margin-top: 44px;
+        color: rgba(219, 234, 254, 0.58);
+        font-size: 13px;
       }
 
-      @media (max-width: 860px) {
-        main {
-          width: min(100% - 28px, 1120px);
-          padding-top: 16px;
-        }
+      .cursor-core {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 12px;
+        height: 12px;
+        z-index: 1000;
+        pointer-events: none;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 0 10px 2px rgba(255,255,255,0.9), 0 0 25px 6px rgba(59,130,246,0.6);
+        transform: translate(-50%, -50%);
+        animation: twinkle-star 1.2s ease-in-out alternate infinite;
+      }
 
-        section {
-          margin-top: 46px;
-        }
+      @keyframes twinkle-star {
+        from { opacity: 0.45; scale: 0.85; box-shadow: 0 0 8px 1px rgba(255,255,255,0.75), 0 0 18px 4px rgba(59,130,246,0.45); }
+        to { opacity: 1; scale: 1.15; box-shadow: 0 0 13px 3px rgba(255,255,255,0.95), 0 0 32px 8px rgba(167,139,250,0.68); }
+      }
 
-        .hero {
-          min-height: auto;
-          padding-top: 24px;
-        }
+      .cursor-particle {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 999;
+        pointer-events: none;
+        border-radius: 50%;
+        box-shadow: 0 0 8px rgba(255,255,255,0.6);
+        transform: translate(-50%, -50%);
+      }
 
-        .grid,
-        .capabilities,
-        .toolkit,
-        .contact,
-        .timeline-item {
-          grid-template-columns: 1fr;
-        }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+        .terminal-loader { display: none; }
+      }
 
-        .qr {
-          width: 150px;
-        }
+      @media (max-width: 920px) {
+        main { width: min(100% - 28px, 1180px); }
+        .hero { min-height: auto; padding-top: 92px; }
+        .hero-grid,
+        .section-head,
+        .agent-grid,
+        .feishu-card,
+        .timeline-item,
+        .contact-grid { grid-template-columns: 1fr; }
+        .doodle-card { min-height: 320px; }
+        .video-rail { grid-auto-columns: minmax(245px, 82%); }
+        .timeline-wrap::before { left: 10px; }
+        .timeline-grid { padding-left: 38px; }
+        .timeline-item::before { left: -34px; }
+        .qr-box { justify-self: start; }
       }
     </style>
   </head>
   <body>
-    <main>
-      <div class="topbar">
-        <button class="lang-toggle" type="button" data-i18n="lang_button" aria-label="Switch language">English</button>
+    <div class="terminal-loader" id="terminalLoader" aria-label="Loading portfolio terminal animation">
+      <div class="terminal-window">
+        <div class="terminal-head">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-line">$ boot aigc_product_portfolio</div>
+          <div class="terminal-line">$ load workflow_blueprints, agents, video_slots</div>
+          <div class="terminal-line">$ connect timeline and base_locations</div>
+          <div class="terminal-line">$ launch Lodya.space</div>
+        </div>
       </div>
+    </div>
 
-      <section class="hero" aria-label="Portfolio introduction">
-        <div>
-          <p class="eyebrow" data-i18n="hero_eyebrow">AIGC Product Portfolio</p>
-          <h1>Lodya</h1>
-          <p class="lead" data-i18n="hero_lead">
-            AIGC 产品候选人，关注内容生产、Prompt 标准化、Workflow 搭建与评测体系，推动 AI 生成能力从单次试验走向可复用、可评估、可交付的工业化流程。
-          </p>
-          <div class="nav-tags" aria-label="Capability navigation">
-            <a class="tag" href="#workflow" data-i18n="tag_workflow">Workflow 搭建</a>
-            <a class="tag" href="#evaluation" data-i18n="tag_evaluation">评测体系</a>
-            <a class="tag" href="#industrialization" data-i18n="tag_industrialization">AIGC 工业化</a>
-            <a class="tag" href="#prompt" data-i18n="tag_prompt">Prompt 产品化</a>
+    <div class="topbar">
+      <button class="lang-toggle" type="button" id="langToggle">English</button>
+    </div>
+
+    <main>
+      <section class="hero" id="hero" aria-label="Portfolio hero">
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow" data-zh="AIGC Product Portfolio" data-en="AIGC Product Portfolio">AIGC Product Portfolio</p>
+            <h1>Lodya</h1>
+            <p class="lead review-blue" data-zh="面向 AIGC 产品与 AI 工作流岗位的作品集。核心证据集中在智能体搭建、视频生成工作流、评测体系、Prompt 产品化和工业化交付。" data-en="A portfolio for AIGC product and AI workflow roles, centered on agent building, video generation workflows, evaluation systems, prompt productization, and industrialized delivery.">面向 AIGC 产品与 AI 工作流岗位的作品集。核心证据集中在智能体搭建、视频生成工作流、评测体系、Prompt 产品化和工业化交付。</p>
+            <nav class="nav-tags" aria-label="Capability navigation">
+              <a class="tech-btn" href="#agents"><span data-zh="智能体搭建" data-en="Agent Building">智能体搭建</span></a>
+              <a class="tech-btn" href="#videos"><span data-zh="AI 视频生成" data-en="AI Video Generation">AI 视频生成</span></a>
+              <a class="tech-btn" href="#feishu"><span data-zh="飞书工作流" data-en="Feishu Workflow">飞书工作流</span></a>
+              <a class="tech-btn" href="#timeline"><span data-zh="经历线" data-en="Experience Timeline">经历线</span></a>
+              <a class="tech-btn" href="#contact"><span data-zh="联系与 Base" data-en="Contact and Base">联系与 Base</span></a>
+            </nav>
+          </div>
+          <div class="doodle-card" aria-hidden="true">
+            <div class="planet"></div>
+            <div class="sketch-line"></div>
+            <div class="hero-note">Workflow<br />Agent<br />AIGC<br />Delivery</div>
           </div>
         </div>
       </section>
 
-      <section id="outcome" aria-labelledby="outcome-title">
-        <p class="eyebrow" data-i18n="outcome_eyebrow">Outcome Snapshot</p>
-        <h2 id="outcome-title" data-i18n="outcome_title">Results first, details on demand.</h2>
-        <p class="section-intro" data-i18n="outcome_intro">
-          先展示项目结果与能力标签，感兴趣再展开工作流、评测体系、Agent 结构或数据流程。这个页面仍处于蓝色评审版，所有蓝色内容都可以继续调整。
-        </p>
-      </section>
-
-      <section id="featured" aria-labelledby="featured-title">
-        <p class="eyebrow" data-i18n="featured_eyebrow">Featured Outcomes</p>
-        <h2 id="featured-title" data-i18n="featured_title">Four proof points for AIGC product work.</h2>
-        <div class="grid">
-          <article class="card" id="evaluation">
-            <p class="result" data-i18n="project_model_result">镜头合格率提升 25%</p>
-            <h3 data-i18n="project_model_title">图生视频大模型一致性优化</h3>
-            <p data-i18n="project_model_desc">通过提示词库适配与分镜级评测体系，将生成质量从主观判断转化为可归因、可复盘、可迭代的问题。</p>
-            <div class="tags">
-              <span class="pill" data-i18n="pill_model_1">模型适配</span>
-              <span class="pill" data-i18n="pill_model_2">评测体系</span>
-              <span class="pill" data-i18n="pill_model_3">badcase 归因</span>
-            </div>
-            <details>
-              <summary data-i18n="project_model_cta">查看评测体系</summary>
-              <ul class="detail-list">
-                <li data-i18n="project_model_detail_1">在北京灵犀深智科技有限公司实习期间，围绕 Seedance 模型特性进行提示词工程与场景适配。</li>
-                <li data-i18n="project_model_detail_2">建立分镜级生成质量评测思路，将主体一致性、镜头稳定性、规则符合度等维度拆成可判断项。</li>
-                <li data-i18n="project_model_detail_3">归因高频 badcase，反向推动 Prompt 迭代与抽卡策略调整。</li>
-              </ul>
-            </details>
-          </article>
-
-          <article class="card" id="workflow">
-            <p class="result" data-i18n="project_workflow_result">视频生产周期缩短 60%</p>
-            <h3 data-i18n="project_workflow_title">AIGC 视频工作流工业化</h3>
-            <p data-i18n="project_workflow_desc">将内容拆解、Prompt 标准化和输出可控性优化串成稳定生产流程，让 AIGC 视频从单次经验变成可复用流程。</p>
-            <div class="tags">
-              <span class="pill" data-i18n="pill_workflow_1">Workflow 搭建</span>
-              <span class="pill" data-i18n="pill_workflow_2">Prompt 标准化</span>
-              <span class="pill" data-i18n="pill_workflow_3">工业化交付</span>
-            </div>
-            <details>
-              <summary data-i18n="project_workflow_cta">查看工作流</summary>
-              <ul class="detail-list">
-                <li data-i18n="project_workflow_detail_1">沉淀 20+ 维度提示词库，把审美、文化语境、多模态一致性转化为可复用描述模块。</li>
-                <li data-i18n="project_workflow_detail_2">搭建内容拆解、Prompt 生成、输出审核、返修同步的生产链路。</li>
-                <li data-i18n="project_workflow_detail_3">以标准化 Prompt 体系和检查清单降低返工，并缩短视频生产周期。</li>
-              </ul>
-            </details>
-          </article>
-
-          <article class="card" id="prompt">
-            <p class="result" data-i18n="project_agent_result">解决 0 经验用户沟通冷启动</p>
-            <h3 data-i18n="project_agent_title">“勇闯校招”AI 智能体</h3>
-            <p data-i18n="project_agent_desc">将面试沟通策略封装为参数化 Prompt 智能体，用交互降维把经验型判断转成可执行对话流程。</p>
-            <div class="tags">
-              <span class="pill" data-i18n="pill_agent_1">Agent 设计</span>
-              <span class="pill" data-i18n="pill_agent_2">Prompt 产品化</span>
-              <span class="pill" data-i18n="pill_agent_3">交互降维</span>
-            </div>
-            <details>
-              <summary data-i18n="project_agent_cta">查看 Agent 结构</summary>
-              <ul class="detail-list">
-                <li data-i18n="project_agent_detail_1">把面试策略、提问、反馈和修正逻辑封装为可配置 Prompt 结构。</li>
-                <li data-i18n="project_agent_detail_2">引入角色机制和复盘机制，让用户不需要先理解复杂策略也能开始使用。</li>
-                <li data-i18n="project_agent_detail_3">沉淀 Prompt 产品化封装和敏捷组织迭代经验。</li>
-              </ul>
-            </details>
-          </article>
-
-          <article class="card">
-            <p class="result" data-i18n="project_growth_result">单人日均触达量提升 50%</p>
-            <h3 data-i18n="project_growth_title">流量归因与 SOP 提效</h3>
-            <p data-i18n="project_growth_desc">建立博主标签-转化表现反馈系统，将筛选、建联和反馈流程标准化，用数据识别高性价比流量。</p>
-            <div class="tags">
-              <span class="pill" data-i18n="pill_growth_1">流量归因</span>
-              <span class="pill" data-i18n="pill_growth_2">数据建模</span>
-              <span class="pill" data-i18n="pill_growth_3">SOP 提效</span>
-            </div>
-            <details>
-              <summary data-i18n="project_growth_cta">查看数据流程</summary>
-              <ul class="detail-list">
-                <li data-i18n="project_growth_detail_1">建立博主标签与转化表现反馈系统，辅助判断流量性价比。</li>
-                <li data-i18n="project_growth_detail_2">将博主筛选与建联流程标准化，减少重复判断和沟通成本。</li>
-                <li data-i18n="project_growth_detail_3">这段经历作为商业化敏感度和数据驱动能力的补充证据。</li>
-              </ul>
-            </details>
-          </article>
-        </div>
-      </section>
-
-      <section id="capabilities" aria-labelledby="capabilities-title">
-        <p class="eyebrow" data-i18n="cap_eyebrow">Core Capabilities</p>
-        <h2 id="capabilities-title" data-i18n="cap_title">The three capabilities I want this portfolio to prove.</h2>
-        <div class="capabilities">
-          <article class="capability" id="industrialization">
-            <h3 data-i18n="cap_workflow_title">Workflow 搭建</h3>
-            <p data-i18n="cap_workflow_desc">把 AIGC 内容生产拆成输入、生成、审核、返修和同步节点，让复杂流程可以被协作和复用。</p>
-          </article>
-          <article class="capability">
-            <h3 data-i18n="cap_eval_title">评测体系搭建</h3>
-            <p data-i18n="cap_eval_desc">把“不稳定”“不一致”“不好看”拆成可观察维度，通过 badcase 归因推动 Prompt 和流程迭代。</p>
-          </article>
-          <article class="capability">
-            <h3 data-i18n="cap_delivery_title">工业化交付</h3>
-            <p data-i18n="cap_delivery_desc">把单次 AI 使用经验沉淀成 Prompt 模板、检查清单和 SOP，让个人经验进入团队生产流程。</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="toolkit" aria-labelledby="toolkit-title">
-        <p class="eyebrow" data-i18n="toolkit_eyebrow">Productization Toolkit</p>
-        <h2 id="toolkit-title" data-i18n="toolkit_title">Reusable assets, not abstract methodology.</h2>
-        <p class="section-intro" data-i18n="toolkit_intro">我在项目中沉淀出的可复用工作流、评测方法和交付工具。</p>
-        <div class="toolkit">
-          <article class="toolkit-card">
-            <h3>Workflow Blueprint</h3>
-            <span class="cn-label" data-i18n="toolkit_workflow_label">工作流蓝图</span>
-            <p data-i18n="toolkit_workflow_desc">AIGC 内容生产从输入、生成、审核到同步交付的流程结构。</p>
-          </article>
-          <article class="toolkit-card">
-            <h3>Evaluation Matrix</h3>
-            <span class="cn-label" data-i18n="toolkit_eval_label">评测矩阵</span>
-            <p data-i18n="toolkit_eval_desc">主体一致性、镜头稳定性、风格一致性、规则符合度等评测维度。</p>
-          </article>
-          <article class="toolkit-card">
-            <h3>Badcase Taxonomy</h3>
-            <span class="cn-label" data-i18n="toolkit_badcase_label">问题归因分类</span>
-            <p data-i18n="toolkit_badcase_desc">高频问题分类、归因，并反向推动 Prompt 和流程迭代。</p>
-          </article>
-          <article class="toolkit-card">
-            <h3>Delivery SOP</h3>
-            <span class="cn-label" data-i18n="toolkit_sop_label">交付标准流程</span>
-            <p data-i18n="toolkit_sop_desc">生成、审核、返修、同步、复盘的标准化交付检查清单。</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="experience" aria-labelledby="experience-title">
-        <p class="eyebrow" data-i18n="experience_eyebrow">Experience Timeline</p>
-        <h2 id="experience-title" data-i18n="experience_title">Experience background, compressed.</h2>
-        <div class="timeline">
-          <article class="timeline-item">
-            <strong data-i18n="exp_1_time">2026.3 - 2026.5</strong>
-            <p data-i18n="exp_1_role">北京灵犀深智科技有限公司 · AI 产品实习生</p>
-            <p data-i18n="exp_1_tags">Prompt / 评测 / 模型适配</p>
-          </article>
-          <article class="timeline-item">
-            <strong data-i18n="exp_2_time">2026.1 - 2026.3</strong>
-            <p data-i18n="exp_2_role">北京阿塔奇科技有限公司 · AIGC 视频工作流架构师</p>
-            <p data-i18n="exp_2_tags">Workflow / Prompt / 工业化</p>
-          </article>
-          <article class="timeline-item">
-            <strong data-i18n="exp_3_time">2025.9 - 2025.12</strong>
-            <p data-i18n="exp_3_role">广东做叫必成传媒有限公司 · 广告媒介</p>
-            <p data-i18n="exp_3_tags">数据归因 / SOP / 商业化</p>
-          </article>
-          <article class="timeline-item">
-            <strong data-i18n="exp_4_time">2023.9 - 2027.6</strong>
-            <p data-i18n="exp_4_role">福建江夏学院 · 法学</p>
-            <p data-i18n="exp_4_tags">CET6 500+ / 创新创业奖项</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="contact" aria-label="Contact">
-        <div>
-          <p class="eyebrow" data-i18n="contact_eyebrow">Contact</p>
-          <h2 data-i18n="contact_title">正在寻找 AIGC 产品 / AI 产品相关实习机会</h2>
-          <p data-i18n="contact_intro">如果你关注 AIGC 内容生产、AI 工作流、模型评测或 Agent 产品方向，欢迎通过简历或二维码进一步了解我。邮箱信息会在简历版本中同步补充。</p>
-          <div class="contact-actions">
-            <a class="button" href="#experience" data-i18n="contact_resume">查看在线简历入口</a>
-            <a class="button secondary" href="#featured" data-i18n="contact_projects">回到精选成果</a>
+      <section id="capability-archive" aria-labelledby="archiveTitle">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow section-kicker" data-zh="Capability Archive" data-en="Capability Archive">Capability Archive</p>
+            <h2 id="archiveTitle" data-zh="能力沉淀展示" data-en="Capability Proof Area">能力沉淀展示</h2>
+            <p class="section-copy review-blue" data-zh="这一页先把作品集框架搭起来。所有图片、视频和外链都预留接口，后续只需要替换资源路径或链接。" data-en="This page establishes the portfolio structure first. Images, videos, and outbound links are reserved as interfaces for later replacement.">这一页先把作品集框架搭起来。所有图片、视频和外链都预留接口，后续只需要替换资源路径或链接。</p>
+          </div>
+          <div class="paper-note">
+            <p data-zh="阅读路径：先看能力入口，再看智能体、视频效果、飞书系统，最后通过经历线验证这些能力从哪里来。" data-en="Reading path: scan capability entries first, then inspect agents, video effects, Feishu integration, and finally verify the origin of these capabilities through the timeline.">阅读路径：先看能力入口，再看智能体、视频效果、飞书系统，最后通过经历线验证这些能力从哪里来。</p>
           </div>
         </div>
-        <div class="qr" aria-label="Portfolio QR code">
-          <img src="assets/portfolio-qr.svg" alt="QR code linking to this portfolio" />
+
+        <div class="panel" id="agents">
+          <p class="eyebrow" data-zh="01 / Agent Builder" data-en="01 / Agent Builder">01 / Agent Builder</p>
+          <h3 data-zh="小智能体与 Prompt 产品化经验" data-en="Mini Agents and Prompt Productization">小智能体与 Prompt 产品化经验</h3>
+          <p class="review-blue" data-zh="每张图片后续可接入真实智能体链接。当前版本保留 image/link 接口，用来验证卡片结构和交互路径。" data-en="Each image can later connect to a real agent link. This version keeps image and link interfaces to validate the structure and interaction path.">每张图片后续可接入真实智能体链接。当前版本保留 image/link 接口，用来验证卡片结构和交互路径。</p>
+          <div class="agent-grid">
+            <a class="agent-card" href="#" data-link-slot="https://your-agent-link/job-hunt" data-image-slot="assets/agents/job-hunt-agent.png">
+              <div class="agent-visual" data-slot="IMAGE SLOT"></div>
+              <div class="agent-body">
+                <h3 data-zh="勇闯校招智能体" data-en="Job Hunt Agent">勇闯校招智能体</h3>
+                <p data-zh="将沟通策略、复盘机制和角色设定封装为可交互的 Prompt 智能体。" data-en="Packages communication strategy, review logic, and role settings into an interactive prompt agent.">将沟通策略、复盘机制和角色设定封装为可交互的 Prompt 智能体。</p>
+                <p class="interface-hint">data-image-slot / data-link-slot</p>
+              </div>
+            </a>
+            <a class="agent-card" href="#" data-link-slot="https://your-agent-link/video-gpt" data-image-slot="assets/agents/video-gpt.png">
+              <div class="agent-visual" data-slot="IMAGE SLOT"></div>
+              <div class="agent-body">
+                <h3 data-zh="GPT 生视频个人 GPT" data-en="Personal Video GPT">GPT 生视频个人 GPT</h3>
+                <p data-zh="面向图生视频任务，沉淀提示词结构、画面约束和输出检查方式。" data-en="For image-to-video tasks, it stores prompt structures, visual constraints, and output checks.">面向图生视频任务，沉淀提示词结构、画面约束和输出检查方式。</p>
+                <p class="interface-hint">data-image-slot / data-link-slot</p>
+              </div>
+            </a>
+            <a class="agent-card" href="#" data-link-slot="https://your-agent-link/gemini-video-gem" data-image-slot="assets/agents/gemini-video-gem.png">
+              <div class="agent-visual" data-slot="IMAGE SLOT"></div>
+              <div class="agent-body">
+                <h3 data-zh="Gemini 视频拆解 Gem" data-en="Gemini Video Breakdown Gem">Gemini 视频拆解 Gem</h3>
+                <p data-zh="用于拆解视频结构、镜头语言和素材要素，辅助生成流程标准化。" data-en="Breaks down video structure, shot language, and material elements for standardized generation workflows.">用于拆解视频结构、镜头语言和素材要素，辅助生成流程标准化。</p>
+                <p class="interface-hint">data-image-slot / data-link-slot</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="panel" id="videos">
+          <p class="eyebrow" data-zh="02 / AI Video Effects" data-en="02 / AI Video Effects">02 / AI Video Effects</p>
+          <h3 data-zh="TK 变装视频效果展示" data-en="TK Transformation Video Showcase">TK 变装视频效果展示</h3>
+          <p class="review-blue" data-zh="横向滑动选择视频。后续把 data-video-src 替换成真实视频地址后，鼠标移入会自动播放，移出暂停。" data-en="Swipe horizontally to select videos. Replace data-video-src with real video URLs later; hover will autoplay and mouse leave will pause.">横向滑动选择视频。后续把 data-video-src 替换成真实视频地址后，鼠标移入会自动播放，移出暂停。</p>
+          <div class="video-rail" aria-label="Video carousel">
+            <article class="video-card">
+              <div class="video-shell"><video muted loop playsinline preload="metadata" data-video-src=""></video><div class="video-placeholder">VIDEO SLOT 01<br />TK TRANSFORMATION</div></div>
+              <div class="video-body"><h3>Look 01</h3><p class="interface-hint">data-video-src="assets/videos/tk-01.mp4"</p></div>
+            </article>
+            <article class="video-card">
+              <div class="video-shell"><video muted loop playsinline preload="metadata" data-video-src=""></video><div class="video-placeholder">VIDEO SLOT 02<br />TK TRANSFORMATION</div></div>
+              <div class="video-body"><h3>Look 02</h3><p class="interface-hint">data-video-src="assets/videos/tk-02.mp4"</p></div>
+            </article>
+            <article class="video-card">
+              <div class="video-shell"><video muted loop playsinline preload="metadata" data-video-src=""></video><div class="video-placeholder">VIDEO SLOT 03<br />TK TRANSFORMATION</div></div>
+              <div class="video-body"><h3>Look 03</h3><p class="interface-hint">data-video-src="assets/videos/tk-03.mp4"</p></div>
+            </article>
+            <article class="video-card">
+              <div class="video-shell"><video muted loop playsinline preload="metadata" data-video-src=""></video><div class="video-placeholder">VIDEO SLOT 04<br />TK TRANSFORMATION</div></div>
+              <div class="video-body"><h3>Look 04</h3><p class="interface-hint">data-video-src="assets/videos/tk-04.mp4"</p></div>
+            </article>
+          </div>
+        </div>
+
+        <div class="feishu-card" id="feishu" data-link-slot="https://your-feishu-task-system-link">
+          <div>
+            <p class="eyebrow" data-zh="03 / Feishu Integration" data-en="03 / Feishu Integration">03 / Feishu Integration</p>
+            <h3 data-zh="任务记录系统与飞书打通" data-en="Task Record System Connected with Feishu">任务记录系统与飞书打通</h3>
+            <p class="review-blue" data-zh="这里预留飞书任务记录系统入口，用来展示你把 AI 工作流和协作系统打通的能力。" data-en="This slot is reserved for the Feishu task record system, proving the ability to connect AI workflows with collaboration systems.">这里预留飞书任务记录系统入口，用来展示你把 AI 工作流和协作系统打通的能力。</p>
+            <p class="interface-hint">data-link-slot="https://your-feishu-task-system-link"</p>
+          </div>
+          <a class="tech-btn" href="#" data-placeholder-link><span data-zh="打开系统接口" data-en="Open System Slot">打开系统接口</span></a>
         </div>
       </section>
 
-      <footer data-i18n="footer">Blue review version. Last updated in 2026.</footer>
+      <section id="timeline" aria-labelledby="timelineTitle">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow section-kicker" data-zh="Experience Timeline" data-en="Experience Timeline">Experience Timeline</p>
+            <h2 id="timelineTitle" data-zh="经历线" data-en="Career and Project Timeline">经历线</h2>
+            <p class="section-copy review-blue" data-zh="采用涂鸦风时间线。默认只看公司、岗位、时间和关键词，鼠标移到对应经历后展开细节。" data-en="A doodle-style timeline. By default it shows company, role, time, and keywords; hover each item to reveal details.">采用涂鸦风时间线。默认只看公司、岗位、时间和关键词，鼠标移到对应经历后展开细节。</p>
+          </div>
+          <div class="paper-note"><p data-zh="这里用于交代能力来源，不抢首页主线。" data-en="This section explains where the capabilities come from without distracting from the main portfolio story.">这里用于交代能力来源，不抢首页主线。</p></div>
+        </div>
+        <div class="timeline-wrap">
+          <div class="timeline-grid">
+            <article class="timeline-item" tabindex="0">
+              <strong>2026.3 - 2026.5</strong>
+              <div><h3>北京灵犀深智科技有限公司</h3><p>AI 产品实习生</p></div>
+              <div class="keyword">Prompt / 评测 / 模型适配</div>
+              <p class="timeline-detail review-blue">围绕图生视频大模型做提示词工程、场景适配、分镜级评测和 badcase 沉淀，推动镜头合格率提升 25%，并建立生成-审核-同步的标准化 SOP。</p>
+            </article>
+            <article class="timeline-item" tabindex="0">
+              <strong>2026.1 - 2026.3</strong>
+              <div><h3>北京阿塔奇科技有限公司</h3><p>AIGC 视频工作流架构师</p></div>
+              <div class="keyword">Workflow / Prompt / 工业化</div>
+              <p class="timeline-detail review-blue">基于内容拆解框架沉淀 20+ 维度提示词库，建立标准化 Prompt 体系，优化模型输出可控性，将视频生产周期缩短 60%。</p>
+            </article>
+            <article class="timeline-item" tabindex="0">
+              <strong>2025.9 - 2025.12</strong>
+              <div><h3>广东做叫必成传媒有限公司</h3><p>广告媒介</p></div>
+              <div class="keyword">流量归因 / SOP / 商业化</div>
+              <p class="timeline-detail review-blue">建立博主标签-转化表现反馈系统，通过数据挖掘锁定高性价比流量洼地，并将筛选与建联流程标准化，单人日均触达量提升 50%。</p>
+            </article>
+            <article class="timeline-item" tabindex="0">
+              <strong>2025.9 - 2025.10</strong>
+              <div><h3>“勇闯校招”AI 智能体项目</h3><p>负责人</p></div>
+              <div class="keyword">Agent / 交互降维 / Prompt 产品化</div>
+              <p class="timeline-detail review-blue">将面试策略转化为参数化 Prompt 智能体，引入 3W 复盘和角色机制，降低 0 经验用户沟通冷启动门槛。</p>
+            </article>
+            <article class="timeline-item" tabindex="0">
+              <strong>2023.9 - 2027.6</strong>
+              <div><h3>福建江夏学院</h3><p>法学</p></div>
+              <div class="keyword">CET6 500+ / 奖项</div>
+              <p class="timeline-detail review-blue">第十七届“挑战杯”福建省大学生课外学术科技作品三等奖，海峡两岸信息服务创新大赛三等奖。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" aria-labelledby="contactTitle">
+        <div class="contact-grid">
+          <div class="contact-panel">
+            <p class="eyebrow section-kicker" data-zh="Contact" data-en="Contact">Contact</p>
+            <h2 id="contactTitle" data-zh="联系与 Base 地" data-en="Contact and Base Locations">联系与 Base 地</h2>
+            <p class="review-blue" data-zh="当前重点投递 AIGC 产品、AI 工作流、Agent 产品、内容生成产品相关机会。联系方式可随简历版本补充，二维码保留为移动端扫码入口。" data-en="Current target roles include AIGC product, AI workflow, agent product, and content generation product opportunities. Contact details can be added with the resume version; QR code remains the mobile entry.">当前重点投递 AIGC 产品、AI 工作流、Agent 产品、内容生成产品相关机会。联系方式可随简历版本补充，二维码保留为移动端扫码入口。</p>
+            <div class="base-list" aria-label="Base locations">
+              <span class="base-chip">深圳</span>
+              <span class="base-chip">上海</span>
+              <span class="base-chip">成都</span>
+              <span class="base-chip">广州</span>
+              <span class="base-chip">杭州</span>
+            </div>
+          </div>
+          <div class="qr-box">
+            <img src="assets/portfolio-qr.svg" alt="QR code linking to this portfolio" />
+          </div>
+        </div>
+      </section>
+
+      <footer>Last updated in 2026. Interface slots are reserved for images, videos, agent links, and Feishu links.</footer>
     </main>
 
+    <div class="cursor-core" id="cursorCore" aria-hidden="true"></div>
+
     <script>
-      const copy = {
-        zh: {
-          lang_button: "English",
-          hero_eyebrow: "AIGC Product Portfolio",
-          hero_lead: "AIGC 产品候选人，关注内容生产、Prompt 标准化、Workflow 搭建与评测体系，推动 AI 生成能力从单次试验走向可复用、可评估、可交付的工业化流程。",
-          tag_workflow: "Workflow 搭建",
-          tag_evaluation: "评测体系",
-          tag_industrialization: "AIGC 工业化",
-          tag_prompt: "Prompt 产品化",
-          outcome_eyebrow: "Outcome Snapshot",
-          outcome_title: "Results first, details on demand.",
-          outcome_intro: "先展示项目结果与能力标签，感兴趣再展开工作流、评测体系、Agent 结构或数据流程。这个页面仍处于蓝色评审版，所有蓝色内容都可以继续调整。",
-          featured_eyebrow: "Featured Outcomes",
-          featured_title: "Four proof points for AIGC product work.",
-          project_model_result: "镜头合格率提升 25%",
-          project_model_title: "图生视频大模型一致性优化",
-          project_model_desc: "通过提示词库适配与分镜级评测体系，将生成质量从主观判断转化为可归因、可复盘、可迭代的问题。",
-          pill_model_1: "模型适配",
-          pill_model_2: "评测体系",
-          pill_model_3: "badcase 归因",
-          project_model_cta: "查看评测体系",
-          project_model_detail_1: "在北京灵犀深智科技有限公司实习期间，围绕 Seedance 模型特性进行提示词工程与场景适配。",
-          project_model_detail_2: "建立分镜级生成质量评测思路，将主体一致性、镜头稳定性、规则符合度等维度拆成可判断项。",
-          project_model_detail_3: "归因高频 badcase，反向推动 Prompt 迭代与抽卡策略调整。",
-          project_workflow_result: "视频生产周期缩短 60%",
-          project_workflow_title: "AIGC 视频工作流工业化",
-          project_workflow_desc: "将内容拆解、Prompt 标准化和输出可控性优化串成稳定生产流程，让 AIGC 视频从单次经验变成可复用流程。",
-          pill_workflow_1: "Workflow 搭建",
-          pill_workflow_2: "Prompt 标准化",
-          pill_workflow_3: "工业化交付",
-          project_workflow_cta: "查看工作流",
-          project_workflow_detail_1: "沉淀 20+ 维度提示词库，把审美、文化语境、多模态一致性转化为可复用描述模块。",
-          project_workflow_detail_2: "搭建内容拆解、Prompt 生成、输出审核、返修同步的生产链路。",
-          project_workflow_detail_3: "以标准化 Prompt 体系和检查清单降低返工，并缩短视频生产周期。",
-          project_agent_result: "解决 0 经验用户沟通冷启动",
-          project_agent_title: "“勇闯校招”AI 智能体",
-          project_agent_desc: "将面试沟通策略封装为参数化 Prompt 智能体，用交互降维把经验型判断转成可执行对话流程。",
-          pill_agent_1: "Agent 设计",
-          pill_agent_2: "Prompt 产品化",
-          pill_agent_3: "交互降维",
-          project_agent_cta: "查看 Agent 结构",
-          project_agent_detail_1: "把面试策略、提问、反馈和修正逻辑封装为可配置 Prompt 结构。",
-          project_agent_detail_2: "引入角色机制和复盘机制，让用户不需要先理解复杂策略也能开始使用。",
-          project_agent_detail_3: "沉淀 Prompt 产品化封装和敏捷组织迭代经验。",
-          project_growth_result: "单人日均触达量提升 50%",
-          project_growth_title: "流量归因与 SOP 提效",
-          project_growth_desc: "建立博主标签-转化表现反馈系统，将筛选、建联和反馈流程标准化，用数据识别高性价比流量。",
-          pill_growth_1: "流量归因",
-          pill_growth_2: "数据建模",
-          pill_growth_3: "SOP 提效",
-          project_growth_cta: "查看数据流程",
-          project_growth_detail_1: "建立博主标签与转化表现反馈系统，辅助判断流量性价比。",
-          project_growth_detail_2: "将博主筛选与建联流程标准化，减少重复判断和沟通成本。",
-          project_growth_detail_3: "这段经历作为商业化敏感度和数据驱动能力的补充证据。",
-          cap_eyebrow: "Core Capabilities",
-          cap_title: "The three capabilities I want this portfolio to prove.",
-          cap_workflow_title: "Workflow 搭建",
-          cap_workflow_desc: "把 AIGC 内容生产拆成输入、生成、审核、返修和同步节点，让复杂流程可以被协作和复用。",
-          cap_eval_title: "评测体系搭建",
-          cap_eval_desc: "把“不稳定”“不一致”“不好看”拆成可观察维度，通过 badcase 归因推动 Prompt 和流程迭代。",
-          cap_delivery_title: "工业化交付",
-          cap_delivery_desc: "把单次 AI 使用经验沉淀成 Prompt 模板、检查清单和 SOP，让个人经验进入团队生产流程。",
-          toolkit_eyebrow: "Productization Toolkit",
-          toolkit_title: "Reusable assets, not abstract methodology.",
-          toolkit_intro: "我在项目中沉淀出的可复用工作流、评测方法和交付工具。",
-          toolkit_workflow_label: "工作流蓝图",
-          toolkit_workflow_desc: "AIGC 内容生产从输入、生成、审核到同步交付的流程结构。",
-          toolkit_eval_label: "评测矩阵",
-          toolkit_eval_desc: "主体一致性、镜头稳定性、风格一致性、规则符合度等评测维度。",
-          toolkit_badcase_label: "问题归因分类",
-          toolkit_badcase_desc: "高频问题分类、归因，并反向推动 Prompt 和流程迭代。",
-          toolkit_sop_label: "交付标准流程",
-          toolkit_sop_desc: "生成、审核、返修、同步、复盘的标准化交付检查清单。",
-          experience_eyebrow: "Experience Timeline",
-          experience_title: "Experience background, compressed.",
-          exp_1_time: "2026.3 - 2026.5",
-          exp_1_role: "北京灵犀深智科技有限公司 · AI 产品实习生",
-          exp_1_tags: "Prompt / 评测 / 模型适配",
-          exp_2_time: "2026.1 - 2026.3",
-          exp_2_role: "北京阿塔奇科技有限公司 · AIGC 视频工作流架构师",
-          exp_2_tags: "Workflow / Prompt / 工业化",
-          exp_3_time: "2025.9 - 2025.12",
-          exp_3_role: "广东做叫必成传媒有限公司 · 广告媒介",
-          exp_3_tags: "数据归因 / SOP / 商业化",
-          exp_4_time: "2023.9 - 2027.6",
-          exp_4_role: "福建江夏学院 · 法学",
-          exp_4_tags: "CET6 500+ / 创新创业奖项",
-          contact_eyebrow: "Contact",
-          contact_title: "正在寻找 AIGC 产品 / AI 产品相关实习机会",
-          contact_intro: "如果你关注 AIGC 内容生产、AI 工作流、模型评测或 Agent 产品方向，欢迎通过简历或二维码进一步了解我。邮箱信息会在简历版本中同步补充。",
-          contact_resume: "查看在线简历入口",
-          contact_projects: "回到精选成果",
-          footer: "Blue review version. Last updated in 2026."
-        },
-        en: {
-          lang_button: "中文",
-          hero_eyebrow: "AIGC Product Portfolio",
-          hero_lead: "AIGC product candidate focused on content production, prompt standardization, workflow design, and evaluation systems. I turn AI generation from one-off experiments into reusable, measurable, and deliverable production workflows.",
-          tag_workflow: "Workflow Design",
-          tag_evaluation: "Evaluation System",
-          tag_industrialization: "AIGC Industrialization",
-          tag_prompt: "Prompt Productization",
-          outcome_eyebrow: "Outcome Snapshot",
-          outcome_title: "Results first, details on demand.",
-          outcome_intro: "This page shows outcomes and capability tags first. Recruiters and interviewers can expand details only when they want to inspect the workflow, evaluation system, agent structure, or data process.",
-          featured_eyebrow: "Featured Outcomes",
-          featured_title: "Four proof points for AIGC product work.",
-          project_model_result: "25% lift in shot-level pass rate",
-          project_model_title: "Image-to-Video Model Consistency Optimization",
-          project_model_desc: "Adapted prompt libraries and shot-level evaluation criteria to make generation quality attributable, reviewable, and iteratable.",
-          pill_model_1: "Model Adaptation",
-          pill_model_2: "Evaluation System",
-          pill_model_3: "Badcase Analysis",
-          project_model_cta: "View Evaluation System",
-          project_model_detail_1: "During my internship at Beijing Lingxi Shenzhi Technology, I worked on prompt engineering and scenario adaptation around Seedance model behavior.",
-          project_model_detail_2: "Built a shot-level review logic across subject consistency, camera stability, and rule compliance.",
-          project_model_detail_3: "Mapped frequent badcases back to prompt iterations and sampling strategy adjustments.",
-          project_workflow_result: "60% shorter video production cycle",
-          project_workflow_title: "AIGC Video Workflow Industrialization",
-          project_workflow_desc: "Connected content decomposition, prompt standardization, and output control into a repeatable production workflow.",
-          pill_workflow_1: "Workflow Design",
-          pill_workflow_2: "Prompt Standardization",
-          pill_workflow_3: "Industrial Delivery",
-          project_workflow_cta: "View Workflow",
-          project_workflow_detail_1: "Built a 20+ dimension prompt library that turns aesthetic, cultural, and multimodal consistency rules into reusable modules.",
-          project_workflow_detail_2: "Structured the production chain from content decomposition to prompt generation, output review, revision, and synchronization.",
-          project_workflow_detail_3: "Reduced rework through standardized prompts and review checklists.",
-          project_agent_result: "Solved communication cold start for zero-experience users",
-          project_agent_title: "Job Hunt AI Agent",
-          project_agent_desc: "Packaged interview communication strategies into a parameterized prompt agent and translated tacit experience into executable dialogue flows.",
-          pill_agent_1: "Agent Design",
-          pill_agent_2: "Prompt Productization",
-          pill_agent_3: "Interaction Simplification",
-          project_agent_cta: "View Agent Structure",
-          project_agent_detail_1: "Converted interview strategy, questioning, feedback, and correction logic into configurable prompt structures.",
-          project_agent_detail_2: "Introduced role and review mechanisms so users can start without first learning complex strategy concepts.",
-          project_agent_detail_3: "Built experience in prompt productization and agile iteration.",
-          project_growth_result: "50% lift in daily outreach volume per person",
-          project_growth_title: "Traffic Attribution and SOP Efficiency",
-          project_growth_desc: "Built a creator tagging and conversion feedback system, then standardized screening and outreach processes with data-driven judgment.",
-          pill_growth_1: "Traffic Attribution",
-          pill_growth_2: "Data Modeling",
-          pill_growth_3: "SOP Efficiency",
-          project_growth_cta: "View Data Process",
-          project_growth_detail_1: "Built a creator tagging and conversion feedback system to evaluate traffic cost-effectiveness.",
-          project_growth_detail_2: "Standardized creator screening and outreach to reduce repeated judgment and communication cost.",
-          project_growth_detail_3: "This experience supports my commercial sense and data-driven product judgment.",
-          cap_eyebrow: "Core Capabilities",
-          cap_title: "The three capabilities I want this portfolio to prove.",
-          cap_workflow_title: "Workflow Design",
-          cap_workflow_desc: "Break AIGC content production into input, generation, review, revision, and synchronization nodes so the process can be reused by a team.",
-          cap_eval_title: "Evaluation System Design",
-          cap_eval_desc: "Turn unstable or inconsistent AI outputs into observable dimensions and use badcase attribution to improve prompts and process design.",
-          cap_delivery_title: "Industrialized Delivery",
-          cap_delivery_desc: "Turn one-off AI usage into prompt templates, checklists, and SOPs that can enter a team production workflow.",
-          toolkit_eyebrow: "Productization Toolkit",
-          toolkit_title: "Reusable assets, not abstract methodology.",
-          toolkit_intro: "Reusable workflow, evaluation, and delivery assets I have built through project work.",
-          toolkit_workflow_label: "Workflow Blueprint",
-          toolkit_workflow_desc: "A structured AIGC production flow from input and generation to review and delivery synchronization.",
-          toolkit_eval_label: "Evaluation Matrix",
-          toolkit_eval_desc: "A review matrix covering subject consistency, camera stability, visual style, and rule compliance.",
-          toolkit_badcase_label: "Badcase Taxonomy",
-          toolkit_badcase_desc: "A taxonomy for classifying frequent issues and feeding them back into prompt and workflow iteration.",
-          toolkit_sop_label: "Delivery SOP",
-          toolkit_sop_desc: "A standardized checklist for generation, review, revision, synchronization, and retrospective learning.",
-          experience_eyebrow: "Experience Timeline",
-          experience_title: "Experience background, compressed.",
-          exp_1_time: "Mar 2026 - May 2026",
-          exp_1_role: "Beijing Lingxi Shenzhi Technology · AI Product Intern",
-          exp_1_tags: "Prompt / Evaluation / Model Adaptation",
-          exp_2_time: "Jan 2026 - Mar 2026",
-          exp_2_role: "Beijing Ataqi Technology · AIGC Video Workflow Architect",
-          exp_2_tags: "Workflow / Prompt / Industrialization",
-          exp_3_time: "Sep 2025 - Dec 2025",
-          exp_3_role: "Guangdong Zuojiao Bicheng Media · Advertising Media",
-          exp_3_tags: "Attribution / SOP / Commercial Sense",
-          exp_4_time: "Sep 2023 - Jun 2027",
-          exp_4_role: "Fujian Jiangxia University · Law",
-          exp_4_tags: "CET6 500+ / Innovation Awards",
-          contact_eyebrow: "Contact",
-          contact_title: "Seeking AIGC Product / AI Product internship opportunities",
-          contact_intro: "If your team works on AIGC content production, AI workflows, model evaluation, or agent products, feel free to learn more through my resume entry or QR code.",
-          contact_resume: "View Resume Entry",
-          contact_projects: "Back to Outcomes",
-          footer: "Blue review version. Last updated in 2026."
-        }
-      };
+      const loader = document.getElementById('terminalLoader');
+      window.setTimeout(() => loader.classList.add('is-hidden'), 3400);
+      loader.addEventListener('click', () => loader.classList.add('is-hidden'));
 
-      let currentLang = "zh";
-      const elements = document.querySelectorAll("[data-i18n]");
-      const button = document.querySelector(".lang-toggle");
+      const langToggle = document.getElementById('langToggle');
+      const translatable = document.querySelectorAll('[data-zh][data-en]');
+      let lang = 'zh';
 
-      function applyLanguage(lang) {
-        currentLang = lang;
-        document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
-        elements.forEach((element) => {
-          const key = element.dataset.i18n;
-          if (copy[lang][key]) {
-            element.textContent = copy[lang][key];
-          }
+      function applyLang(nextLang) {
+        lang = nextLang;
+        document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+        translatable.forEach((node) => {
+          node.textContent = node.dataset[lang];
         });
+        langToggle.textContent = lang === 'zh' ? 'English' : '中文';
       }
 
-      button.addEventListener("click", () => {
-        applyLanguage(currentLang === "zh" ? "en" : "zh");
+      langToggle.addEventListener('click', () => applyLang(lang === 'zh' ? 'en' : 'zh'));
+      applyLang('zh');
+
+      document.querySelectorAll('.agent-card, [data-placeholder-link]').forEach((link) => {
+        link.addEventListener('click', (event) => {
+          const url = link.dataset.linkSlot || link.closest('[data-link-slot]')?.dataset.linkSlot;
+          if (!url || url.includes('your-')) {
+            event.preventDefault();
+            alert(lang === 'zh' ? '链接接口已预留，后续替换为真实地址。' : 'Link slot reserved. Replace it with the real URL later.');
+            return;
+          }
+          link.href = url;
+        });
       });
 
-      applyLanguage("zh");
+      document.querySelectorAll('.video-card').forEach((card) => {
+        const video = card.querySelector('video');
+        const placeholder = card.querySelector('.video-placeholder');
+        card.addEventListener('mouseenter', () => {
+          const src = video.dataset.videoSrc;
+          if (!src) return;
+          if (!video.src) video.src = src;
+          placeholder.style.display = 'none';
+          video.play().catch(() => {});
+        });
+        card.addEventListener('mouseleave', () => {
+          if (!video.src) return;
+          video.pause();
+        });
+      });
+
+      const finePointer = window.matchMedia('(pointer: fine)').matches;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const cursorCore = document.getElementById('cursorCore');
+      const particles = [];
+      const maxParticles = 40;
+
+      if (!finePointer || reducedMotion) {
+        cursorCore.style.display = 'none';
+      } else {
+        window.addEventListener('mousemove', (event) => {
+          cursorCore.style.left = `${event.clientX}px`;
+          cursorCore.style.top = `${event.clientY}px`;
+          createParticle(event.clientX, event.clientY);
+        });
+        requestAnimationFrame(updateParticles);
+      }
+
+      function createParticle(x, y) {
+        const particle = document.createElement('span');
+        particle.className = 'cursor-particle';
+        const size = 2 + Math.random() * 5;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.background = Math.random() > 0.5 ? '#ffffff' : '#93c5fd';
+        document.body.appendChild(particle);
+        particles.push({
+          element: particle,
+          x,
+          y,
+          vx: (Math.random() - 0.5) * 1.2,
+          vy: (Math.random() - 0.5) * 1.2,
+          life: 1,
+          size,
+        });
+        while (particles.length > maxParticles) {
+          const old = particles.shift();
+          old.element.remove();
+        }
+      }
+
+      function updateParticles() {
+        for (let index = particles.length - 1; index >= 0; index -= 1) {
+          const particle = particles[index];
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+          particle.life -= 0.035;
+          const scale = Math.max(particle.life, 0);
+          particle.element.style.opacity = `${Math.max(particle.life, 0)}`;
+          particle.element.style.transform = `translate(${particle.x}px, ${particle.y}px) scale(${scale})`;
+          if (particle.life <= 0) {
+            particle.element.remove();
+            particles.splice(index, 1);
+          }
+        }
+        requestAnimationFrame(updateParticles);
+      }
     </script>
   </body>
 </html>
