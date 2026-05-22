@@ -32,6 +32,7 @@
   </script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    .border-3 { border-width: 3px; }
     body {
       font-family: 'Noto Sans SC', system-ui, sans-serif;
       background-color: #fef9e7;
@@ -116,7 +117,6 @@
     }
     .terminal-line { margin-bottom: 4px; min-height: 1.6em; }
     .terminal-prompt { color: #10b981; }
-    .terminal-input { color: #e2e8f0; }
     .terminal-output { color: #94a3b8; }
     .terminal-success { color: #34d399; }
     .cursor-blink { display: inline-block; width: 8px; height: 16px; background: #e2e8f0; animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 2px; }
@@ -310,8 +310,6 @@
       animation: float 5s ease-in-out infinite;
     }
     @keyframes float { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(3deg); } }
-    .hand-drawn-border { border: 3px solid #1f2937; border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; box-shadow: 4px 4px 0px rgba(31,41,55,0.15); }
-    .hand-drawn-border:hover { box-shadow: 6px 6px 0px rgba(59,130,246,0.25); border-color: #3b82f6; }
     .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5,0,0,1); }
     .reveal.active { opacity: 1; transform: translateY(0); }
     .award-card {
@@ -326,6 +324,19 @@
     }
     .award-card::before { content: '🏆'; position: absolute; top: 10px; right: 15px; font-size: 3rem; opacity: 0.1; transform: rotate(-10deg); }
     .award-card:hover { transform: translateY(-4px); box-shadow: 6px 6px 0px rgba(251,191,36,0.3); border-color: #fbbf24; }
+    .highlight-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border: 2px solid #1f2937;
+      border-radius: 999px;
+      background: #fbbf24;
+      color: #1f2937;
+      font-size: 0.85rem;
+      font-weight: 900;
+      box-shadow: 2px 2px 0 rgba(31,41,55,0.18);
+    }
     .contact-link {
       display: flex;
       align-items: center;
@@ -384,7 +395,7 @@
         <div class="terminal-btn btn-red"></div>
         <div class="terminal-btn btn-yellow"></div>
         <div class="terminal-btn btn-green"></div>
-        <span class="ml-2 text-xs text-slate-400 font-mono">portfolio — zsh</span>
+        <span class="ml-2 text-xs text-slate-400 font-mono">portfolio - zsh</span>
       </div>
       <div class="terminal-body" id="terminal-body"></div>
     </div>
@@ -425,13 +436,13 @@
               <div class="aspect-[4/3] bg-slate-100 rounded-xl mb-4 overflow-hidden border-3 border-doodle-ink/20 relative"><img src="https://placehold.co/400x300/fef9e7/1f2937?text=GPT+Video" alt="GPT生视频" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"><div class="absolute top-3 left-3 bg-white/90 border-2 border-doodle-ink rounded-full px-3 py-1 text-xs font-bold shadow-[2px_2px_0px_rgba(0,0,0,0.1)]">GPT</div></div>
               <h4 class="text-lg font-bold text-doodle-ink mb-2">GPT 视频生成助手</h4>
               <p class="text-sm text-gray-600 mb-4 leading-relaxed">基于GPT架构的个人视频生成工作流，实现从脚本到成片的自动化内容生产。</p>
-              <a href="#" data-agent-link="gpt-video" class="inline-flex items-center gap-2 text-doodle-blue font-bold text-sm hover:underline">查看项目 <span class="text-lg">→</span></a>
+              <a href="#" data-agent-link="gpt-video" class="inline-flex items-center gap-2 text-doodle-blue font-bold text-sm hover:underline">体验智能体 <span class="text-lg">→</span></a>
             </div>
             <div class="doodle-card group">
               <div class="aspect-[4/3] bg-slate-100 rounded-xl mb-4 overflow-hidden border-3 border-doodle-ink/20 relative"><img src="https://placehold.co/400x300/fef9e7/1f2937?text=Gemini+Engine" alt="Gemini拆解" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"><div class="absolute top-3 left-3 bg-white/90 border-2 border-doodle-ink rounded-full px-3 py-1 text-xs font-bold shadow-[2px_2px_0px_rgba(0,0,0,0.1)]">Gemini</div></div>
               <h4 class="text-lg font-bold text-doodle-ink mb-2">Gemini 视频拆解引擎</h4>
               <p class="text-sm text-gray-600 mb-4 leading-relaxed">利用Gemini多模态能力，自动拆解爆款视频结构，提取可复用的内容基因与节奏模板。</p>
-              <a href="#" data-agent-link="gemini" class="inline-flex items-center gap-2 text-doodle-blue font-bold text-sm hover:underline">查看项目 <span class="text-lg">→</span></a>
+              <a href="#" data-agent-link="gemini" class="inline-flex items-center gap-2 text-doodle-blue font-bold text-sm hover:underline">体验智能体 <span class="text-lg">→</span></a>
             </div>
             <div class="doodle-card group">
               <div class="aspect-[4/3] bg-slate-100 rounded-xl mb-4 overflow-hidden border-3 border-doodle-ink/20 relative"><img src="https://placehold.co/400x300/fef9e7/1f2937?text=勇闯校招" alt="勇闯校招" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"><div class="absolute top-3 left-3 bg-white/90 border-2 border-doodle-ink rounded-full px-3 py-1 text-xs font-bold shadow-[2px_2px_0px_rgba(0,0,0,0.1)]">厂商</div></div>
@@ -470,9 +481,9 @@
         <h2 class="section-title text-doodle-ink reveal">经历时间线</h2>
         <div class="timeline-container mt-16">
           <div class="timeline-line"></div>
-          <div class="timeline-item reveal"><div class="timeline-content"><div class="timeline-dot"></div><div class="text-sm font-bold text-doodle-blue mb-1">2026.3 — 2026.5</div><h3 class="text-xl font-black text-doodle-ink mb-1">北京灵犀深智科技有限公司</h3><div class="text-sm font-bold text-gray-500 mb-3">AI产品实习生</div><div class="flex flex-wrap gap-1 justify-end md:justify-start"><span class="tag">提示词工程</span><span class="tag">场景适配</span><span class="tag">Usecase回归</span><span class="tag">交付闭环</span></div><div class="timeline-details"><ul><li>基于 SACSC 架构建立提示词库并深度适配 Seedance 模型特性，通过持续调优确保分镜生成的高一致性，镜头合格率提升 25%</li><li>建立分镜级生成质量评测体系，归因高频 badcase，反哺 Prompt 迭代与抽卡策略调整</li><li>基于 Coze、飞书跑通 "生成-审核-同步" 全链路，建立标准化 SOP，实现单日协同处理量提升 30%</li><li><strong>沉淀：</strong>生成一致性控制、评测体系量化、工业化交付闭环</li></ul></div></div></div>
-          <div class="timeline-item reveal"><div class="timeline-content"><div class="timeline-dot"></div><div class="text-sm font-bold text-doodle-purple mb-1">2026.1 — 2026.3</div><h3 class="text-xl font-black text-doodle-ink mb-1">北京阿塔奇科技有限公司</h3><div class="text-sm font-bold text-gray-500 mb-3">AIGC 视频工作流架构师</div><div class="flex flex-wrap gap-1 justify-start"><span class="tag">标准化封装</span><span class="tag">工程化提效</span><span class="tag">Prompt体系</span><span class="tag">内容规模化</span></div><div class="timeline-details"><ul><li>基于内容拆解框架沉淀 20+ 维度提示词库，实现爆款视频基因的工业化复刻</li><li>负责模型输出可控性优化，建立标准化 Prompt 体系，实现内容规模化稳定产出，将视频生产周期缩短 60%</li><li><strong>沉淀：</strong>跨文化审美量化、多模态一致性控制、AIGC 工业化交付</li></ul></div></div></div>
-          <div class="timeline-item reveal"><div class="timeline-content"><div class="timeline-dot"></div><div class="text-sm font-bold text-doodle-pink mb-1">2025.9 — 2025.12</div><h3 class="text-xl font-black text-doodle-ink mb-1">广东做则必成传媒有限公司</h3><div class="text-sm font-bold text-gray-500 mb-3">广告媒介</div><div class="flex flex-wrap gap-1 justify-end md:justify-start"><span class="tag">业务流程优化</span><span class="tag">数据归因</span><span class="tag">SOP提效</span><span class="tag">商业化增长</span></div><div class="timeline-details"><ul><li>建立博主标签-转化表现反馈系统，通过数据挖掘锁定高性价比流量洼地</li><li>将博主筛选与建联流程标准化，单人日均触达量提升 50%，显著降低获客成本</li><li><strong>沉淀：</strong>流量归因、多维数据建模、商业化策略增长</li></ul></div></div></div>
+          <div class="timeline-item reveal"><div class="timeline-content"><div class="timeline-dot"></div><div class="text-sm font-bold text-doodle-blue mb-1">2026.3 — 2026.5</div><h3 class="text-xl font-black text-doodle-ink mb-1">北京灵犀深智科技有限公司</h3><div class="text-sm font-bold text-gray-500 mb-3">AI产品实习生</div><div class="flex flex-wrap gap-1 justify-end md:justify-start"><span class="tag">提示词工程</span><span class="tag">Usecase回归</span><span class="tag">交付闭环</span></div><div class="timeline-details"><ul><li>基于 SACSC 架构建立提示词库并深度适配 Seedance 模型特性，通过持续调优确保分镜生成的高一致性，镜头合格率提升 25%</li><li>建立分镜级生成质量评测体系，归因高频 badcase，反哺 Prompt 迭代与抽卡策略调整</li><li>基于 Coze、飞书跑通 "生成-审核-同步" 全链路，建立标准化 SOP，实现单日协同处理量提升 30%</li><li><strong>沉淀：</strong>生成一致性控制、评测体系量化、工业化交付闭环</li></ul></div></div></div>
+          <div class="timeline-item reveal"><div class="timeline-content"><div class="timeline-dot"></div><div class="text-sm font-bold text-doodle-purple mb-1">2026.1 — 2026.3</div><h3 class="text-xl font-black text-doodle-ink mb-1">北京阿塔奇科技有限公司</h3><div class="text-sm font-bold text-gray-500 mb-3">AIGC 视频工作流架构师</div><div class="flex flex-wrap gap-1 justify-start"><span class="tag">标准化封装</span><span class="tag">工程化提效</span><span class="tag">Prompt体系</span></div><div class="timeline-details"><ul><li>基于内容拆解框架沉淀 20+ 维度提示词库，实现爆款视频基因的工业化复刻</li><li>负责模型输出可控性优化，建立标准化 Prompt 体系，实现内容规模化稳定产出，将视频生产周期缩短 60%</li><li><strong>沉淀：</strong>跨文化审美量化、多模态一致性控制、AIGC 工业化交付</li></ul></div></div></div>
+          <div class="timeline-item reveal"><div class="timeline-content"><div class="timeline-dot"></div><div class="text-sm font-bold text-doodle-pink mb-1">2025.9 — 2025.12</div><h3 class="text-xl font-black text-doodle-ink mb-1">广东做则必成传媒有限公司</h3><div class="text-sm font-bold text-gray-500 mb-3">广告媒介</div><div class="flex flex-wrap gap-1 justify-end md:justify-start"><span class="tag">业务流程优化</span><span class="tag">数据归因</span><span class="tag">商业化增长</span></div><div class="timeline-details"><ul><li>建立博主标签-转化表现反馈系统，通过数据挖掘锁定高性价比流量洼地</li><li>将博主筛选与建联流程标准化，单人日均触达量提升 50%，显著降低获客成本</li><li><strong>沉淀：</strong>流量归因、多维数据建模、商业化策略增长</li></ul></div></div></div>
           <div class="timeline-item reveal"><div class="timeline-content"><div class="timeline-dot"></div><div class="text-sm font-bold text-doodle-yellow mb-1">2025.9 — 2025.10</div><h3 class="text-xl font-black text-doodle-ink mb-1">"勇闯校招" AI 智能体项目</h3><div class="text-sm font-bold text-gray-500 mb-3">项目负责人</div><div class="flex flex-wrap gap-1 justify-start"><span class="tag">AI场景化封装</span><span class="tag">敏捷统筹</span><span class="tag">交互闭环验证</span></div><div class="timeline-details"><ul><li>将面试策略转化为参数化 Prompt 智能体，通过 "交互降维" 解决 0 经验用户沟通冷启动问题</li><li>引入 3W 复盘及角色化机制，跨团队协同实现项目沟通损耗降低 40%</li><li>沉淀 "提问-反馈-修正" 逻辑模型，验证 AI 在职业探索场景的规模化应用价值</li><li><strong>沉淀：</strong>交互降维设计、Prompt 产品化封装、敏捷组织迭代</li></ul></div></div></div>
         </div>
       </div>
@@ -480,9 +491,27 @@
     <section id="education" class="py-24 px-6 relative">
       <div class="max-w-4xl mx-auto">
         <h2 class="section-title text-doodle-ink reveal">教育 & 奖项</h2>
-        <div class="grid md:grid-cols-2 gap-8 mt-12">
-          <div class="award-card reveal"><div class="flex items-start gap-4"><div class="w-14 h-14 rounded-full bg-doodle-yellow/20 border-3 border-doodle-ink flex items-center justify-center text-2xl flex-shrink-0">🎓</div><div><h3 class="text-xl font-black text-doodle-ink mb-1">福建江夏学院</h3><p class="text-sm font-bold text-gray-500 mb-2">2023.9 — 2027.6 · 法学 · 本科</p><p class="text-sm text-gray-600 leading-relaxed">主修法学专业，具备严谨的逻辑思维与结构化分析能力，为 AI 产品规则设计和合规评估打下基础。</p></div></div></div>
-          <div class="award-card reveal" style="transition-delay: 0.15s;"><div class="flex items-start gap-4"><div class="w-14 h-14 rounded-full bg-doodle-blue/20 border-3 border-doodle-ink flex items-center justify-center text-2xl flex-shrink-0">🏆</div><div class="flex-1"><h3 class="text-xl font-black text-doodle-ink mb-2">竞赛奖项</h3><ul class="space-y-2"><li class="flex items-start gap-2 text-sm text-gray-700"><span class="text-doodle-blue font-bold mt-0.5">▸</span><span>第十七届 "挑战杯" 福建省大学生课外学术科技作品 <strong class="text-doodle-ink">三等奖</strong></span></li><li class="flex items-start gap-2 text-sm text-gray-700"><span class="text-doodle-blue font-bold mt-0.5">▸</span><span>海峡两岸信息服务创新大赛 <strong class="text-doodle-ink">三等奖</strong></span></li><li class="flex items-start gap-2 text-sm text-gray-700"><span class="text-doodle-blue font-bold mt-0.5">▸</span><span>CET-6 <strong class="text-doodle-ink">500+</strong></span></li></ul></div></div></div>
+        <div class="award-card reveal mt-12">
+          <div class="flex flex-col gap-7">
+            <div class="flex items-start gap-4">
+              <div class="w-14 h-14 rounded-full bg-doodle-yellow/20 border-3 border-doodle-ink flex items-center justify-center text-2xl flex-shrink-0">🎓</div>
+              <div>
+                <h3 class="text-2xl font-black text-doodle-ink mb-1">福建江夏学院</h3>
+                <p class="text-sm font-bold text-gray-500 mb-3">2023.9 — 2027.6 · 法学 · 本科</p>
+                <p class="text-sm text-gray-600 leading-relaxed">主修法学专业，具备严谨的逻辑思维与结构化分析能力，为 AI 产品规则设计和合规评估打下基础。</p>
+              </div>
+            </div>
+            <div class="border-t-2 border-dashed border-gray-200 pt-6">
+              <div class="flex flex-wrap items-center gap-3 mb-4">
+                <span class="highlight-tag">CET-6 500+</span>
+                <span class="text-sm font-black text-doodle-ink">竞赛奖项</span>
+              </div>
+              <ul class="space-y-2">
+                <li class="flex items-start gap-2 text-sm text-gray-700"><span class="text-doodle-blue font-bold mt-0.5">▸</span><span>第十七届 "挑战杯" 福建省大学生课外学术科技作品 <strong class="text-doodle-ink">三等奖</strong></span></li>
+                <li class="flex items-start gap-2 text-sm text-gray-700"><span class="text-doodle-blue font-bold mt-0.5">▸</span><span>海峡两岸信息服务创新大赛 <strong class="text-doodle-ink">三等奖</strong></span></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -494,7 +523,7 @@
         <div class="max-w-lg mx-auto space-y-4 reveal text-left">
           <a href="tel:+86138XXXXXXXX" data-contact="phone" class="contact-link"><span class="text-2xl">📱</span><div><div class="text-xs text-gray-500 font-bold uppercase tracking-wider">手机号码</div><div class="font-bold text-lg">138 XXXX XXXX</div></div></a>
           <a href="mailto:your-email@example.com" data-contact="email" class="contact-link"><span class="text-2xl">✉️</span><div><div class="text-xs text-gray-500 font-bold uppercase tracking-wider">邮箱</div><div class="font-bold text-lg">your-email@example.com</div></div></a>
-          <a href="#" data-contact="resume" class="contact-link"><span class="text-2xl">📄</span><div><div class="text-xs text-gray-500 font-bold uppercase tracking-wider">简历入口</div><div class="font-bold text-lg">下载我的简历 (PDF)</div></div></a>
+          <a href="#" data-contact="resume" class="contact-link"><span class="text-2xl">📄</span><div><div class="text-xs text-gray-500 font-bold uppercase tracking-wider">简历入口</div><div class="font-bold text-lg">简历PDF</div></div></a>
         </div>
         <div class="mt-20 text-sm text-gray-400 reveal"><p>© 2026 Lodyahan. Crafted with AI + Human creativity.</p></div>
       </div>
@@ -539,7 +568,7 @@
     let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
     if (!isTouchDevice) {
       document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
-      function animateCursor() { cursorX += (mouseX - cursorX) * 0.15; cursorY += (mouseY - cursorY) * 0.15; cursorMain.style.left = cursorX + 'px'; cursorMain.style.top = cursorY + 'px'; requestAnimationFrame(animateCursor); }
+      function animateCursor() { cursorX += (mouseX - cursorX) * 0.42; cursorY += (mouseY - cursorY) * 0.42; cursorMain.style.left = cursorX + 'px'; cursorMain.style.top = cursorY + 'px'; requestAnimationFrame(animateCursor); }
       animateCursor();
       const particles = [];
       const MAX_PARTICLES = 40;
